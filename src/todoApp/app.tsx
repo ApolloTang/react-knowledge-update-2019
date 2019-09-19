@@ -22,8 +22,8 @@ interface TodosProps {
 const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
   return (
     <div>
-      <span onClick={deleteTodo} >{todo.text}</span>
-      <button onClick={toggleTodo}>delete</button>
+      <span onClick={toggleTodo} >{todo.text}</span>
+      <button onClick={deleteTodo}>delete</button>
     </div>
   )
 }
@@ -49,17 +49,20 @@ const App = () => {
       completed: false
     }
 
-    const nextTodos = [...todos, newTodo]
-    setTodos(nextTodos)
+    setTodos(prevTodos => [...prevTodos, newTodo])
     setTodoInputText('')
   }
 
   const handle_delete = (id:string) => () => {
-    console.log(id)
+    setTodos(prevTodos => prevTodos.filter(todo=>todo.id !== id))
   }
 
   const handle_toggle = (id:string) => () => {
-    console.log(id)
+    setTodos(prevTodos => prevTodos.map((prevTodo:Todo)=>{
+      return (id === prevTodo.id)
+        ? {...prevTodo, completed: !prevTodo.completed }
+        : prevTodo
+    }))
   }
 
   return (
@@ -76,6 +79,7 @@ const App = () => {
         </form>
       </div>
       <div>UI control</div>
+      <pre><code> {JSON.stringify(todos, null, 2)} </code></pre>
       <div>
         {
           todos.map(
