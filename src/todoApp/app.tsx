@@ -74,19 +74,19 @@ const App = () => {
   return (
     <div>
       <div>
-        <form onSubmit={handle_newTodoSubmit}>
-          <label id="new-todo">Add todo:</label>
+        <form onSubmit={handle_newTodoSubmit} data-testid="new-todo-form">
+          <label htmlFor="new-todo">Add todo:</label>
           <input
             type="text"
             onChange={handle_newTodoChange}
-            name="new-todo"
+            id="new-todo"
             value={todoInputText}
           />
         </form>
       </div>
       <div>UI control</div>
       <pre><code> {JSON.stringify(todos, null, 2)} </code></pre>
-      <div>
+      <div data-testid="todo-list">
         {
           todos.map(
             todo=>(
