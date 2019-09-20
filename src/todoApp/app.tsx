@@ -22,8 +22,14 @@ interface TodosProps {
 const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
   return (
     <div>
-      <span onClick={toggleTodo} >{todo.text}</span>
-      <button onClick={deleteTodo}>delete</button>
+      <button onClick={deleteTodo}>x</button>
+      <label>
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={toggleTodo}
+          />{todo.text}
+      </label>
     </div>
   )
 }
@@ -69,7 +75,7 @@ const App = () => {
     <div>
       <div>
         <form onSubmit={handle_newTodoSubmit}>
-          <label>Add todo:</label>
+          <label id="new-todo">Add todo:</label>
           <input
             type="text"
             onChange={handle_newTodoChange}
