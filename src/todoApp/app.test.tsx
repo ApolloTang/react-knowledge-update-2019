@@ -1,7 +1,6 @@
 import React from 'react'
 import {render, fireEvent, within, getNodeText} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom/extend-expect'
 
 import App from './app'
 
@@ -93,7 +92,7 @@ describe('Todo App',()=>{
   })
 
 
-  test('Can deleted todos', () =>{
+  test('Can deleted todos [D]', () =>{
     const {
       getByLabelText,
       getByTestId,
