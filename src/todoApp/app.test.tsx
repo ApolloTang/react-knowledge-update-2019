@@ -105,31 +105,38 @@ describe('Todo App',()=>{
     ]
 
     // We want to remove todo item with the following text
-    const todoTexts_toDelete = [...todoTexts].splice(1,1)
+    const todoText_toDelete = [...todoTexts].splice(1,1)[0]
 
     const newTodoInput = getByLabelText(/add.todo/i)
     const newTodoForm = getByTestId('new-todo-form')
     const todoList = getByTestId('todo-list')
 
-    // create todo item
+    // create todo items
     todoTexts.forEach(todoText=>{
       userEvent.type(newTodoInput, todoText)
       fireEvent.submit(newTodoForm)
     })
 
-    // now todoItems has been created
+    // now todo items has been created
     const todoItems = getAllByTestId('todo-item')
 
-    // find the todoItems we want to delete
+    // Since delete button is not inside label, we have to find
+    // the parent that contains it, which is the todoItems.
+    // So lets find the todoItems we want to delete.
     const todoItemsToDelete = todoItems.filter( (todoItem)=>{
       const label = todoItem.querySelector('label')
-      return (label)? getNodeText(label) === todoTexts_toDelete[0] : false
+      return (label)? getNodeText(label) === todoText_toDelete : false
+      // the predicate of this filter look for label
+      // with text node that has the text we want.
     })
+
     // get the button
     const deleteTodoButton = within(todoItemsToDelete[0]).getByText('x')
+
     // delete it
     fireEvent.click(deleteTodoButton)
 
-    expect(todoList).not.toHaveTextContent(todoTexts_toDelete[0])
+    // test it
+    expect(todoList).not.toHaveTextContent(todoText_toDelete)
   })
 })
