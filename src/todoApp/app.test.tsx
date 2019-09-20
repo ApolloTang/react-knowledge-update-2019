@@ -13,6 +13,7 @@ describe('Todo App',()=>{
     getByLabelText(/add.todo/i)
   })
 
+
   test('Add todo input take user values', () =>{
     const {
       getByLabelText,
@@ -22,6 +23,7 @@ describe('Todo App',()=>{
     userEvent.type(newTodoInput, todo1)
     expect(newTodoInput).toHaveAttribute('value', todo1)
   })
+
 
   test('Can create todos [CR]', () =>{
     const {
@@ -49,7 +51,49 @@ describe('Todo App',()=>{
     })
   })
 
-  test('Can create deleted todos', () =>{
+
+  test('Can update todos [U]', () =>{
+    const {
+      getByLabelText,
+      getByText,
+      getByTestId,
+      getAllByTestId
+    } = render(<App/>)
+
+    const todoTexts = [
+      'learn react', 'learn redux', 'learn typescript'
+    ]
+
+    // We want to update todo item with the following text
+    const todoText_toUpdate = [...todoTexts].splice(1,1)[0]
+
+    const newTodoInput = getByLabelText(/add.todo/i)
+    const newTodoForm = getByTestId('new-todo-form')
+
+    // create todo items
+    todoTexts.forEach(todoText=>{
+      userEvent.type(newTodoInput, todoText)
+      fireEvent.submit(newTodoForm)
+    })
+
+    // now todoItems has been created
+    getAllByTestId('todo-item')
+
+    // get the checkbox
+    const checkboxToCheck = getByLabelText(todoText_toUpdate) as HTMLInputElement
+
+    // pre test
+    expect(checkboxToCheck.checked).toBe(false)
+
+    // click it
+    fireEvent.click(getByText('learn redux'))
+
+    // test it
+    expect(checkboxToCheck.checked).toBe(true)
+  })
+
+
+  test('Can deleted todos', () =>{
     const {
       getByLabelText,
       getByTestId,
