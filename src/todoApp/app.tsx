@@ -21,7 +21,7 @@ interface TodosProps {
 
 const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
   return (
-    <div>
+    <div data-testid="todo-item">
       <button onClick={deleteTodo}>x</button>
       <label>
         <input

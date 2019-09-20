@@ -1,5 +1,5 @@
 import React from 'react'
-import {render, fireEvent} from '@testing-library/react'
+import {render, fireEvent, within, getNodeText} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom/extend-expect'
 
@@ -23,7 +23,7 @@ describe('Todo App',()=>{
     expect(newTodoInput).toHaveAttribute('value', todo1)
   })
 
-  test('Can create todos', () =>{
+  test('Can create todos [CR]', () =>{
     const {
       getByLabelText,
       getByTestId,
@@ -47,5 +47,45 @@ describe('Todo App',()=>{
     todoTexts.forEach(todoText=>{
       expect(todoList).toHaveTextContent(todoText)
     })
+  })
+
+  test('Can create deleted todos', () =>{
+    const {
+      getByLabelText,
+      getByTestId,
+      getAllByTestId
+    } = render(<App/>)
+
+    const todoTexts = [
+      'learn react', 'learn redux', 'learn typescript'
+    ]
+
+    // We want to remove todo item with the following text
+    const todoTexts_toDelete = [...todoTexts].splice(1,1)
+
+    const newTodoInput = getByLabelText(/add.todo/i)
+    const newTodoForm = getByTestId('new-todo-form')
+    const todoList = getByTestId('todo-list')
+
+    // create todo item
+    todoTexts.forEach(todoText=>{
+      userEvent.type(newTodoInput, todoText)
+      fireEvent.submit(newTodoForm)
+    })
+
+    // now todoItems has been created
+    const todoItems = getAllByTestId('todo-item')
+
+    // find the todoItems we want to delete
+    const todoItemsToDelete = todoItems.filter( (todoItem)=>{
+      const label = todoItem.querySelector('label')
+      return (label)? getNodeText(label) === todoTexts_toDelete[0] : false
+    })
+    // get the button
+    const deleteTodoButton = within(todoItemsToDelete[0]).getByText('x')
+    // delete it
+    fireEvent.click(deleteTodoButton)
+
+    expect(todoList).not.toHaveTextContent(todoTexts_toDelete[0])
   })
 })
