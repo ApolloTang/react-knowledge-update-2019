@@ -39,8 +39,6 @@ function reducer(
 
 export {
   State,
-  // UnknownAction,
-  // -------
   initialState,
 }
 
