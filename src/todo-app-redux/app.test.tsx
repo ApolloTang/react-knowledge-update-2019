@@ -3,32 +3,34 @@ import {render, fireEvent, within, getNodeText} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
-import {rootReducer} from './root-reducer'
+import {rootReducer} from './store'
 import App from './app'
+
+function renderWithStore(
+  ui:React.ReactNode,
+) {
+  const store = createStore(rootReducer)
+  return render(
+    <Provider store={store}>
+      {ui}
+    </Provider>
+  )
+}
+
 
 describe('Todo App',()=>{
   test('Render a "Adding todo" input field', () =>{
-    const store = createStore(rootReducer)
     const {
       getByLabelText,
-    } = render(
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    )
+    } = renderWithStore(<App/>)
     getByLabelText(/add.todo/i)
   })
 
 
   test('Add todo input take user values', () =>{
-    const store = createStore(rootReducer)
     const {
       getByLabelText,
-    } = render(
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    )
+    } = renderWithStore(<App/>)
     const newTodoInput = getByLabelText(/add.todo/i) as HTMLInputElement
     const todo1 = 'learn react'
     userEvent.type(newTodoInput, todo1)
@@ -37,16 +39,10 @@ describe('Todo App',()=>{
 
 
   test('Can create todos [CR]', () =>{
-    const store = createStore(rootReducer)
     const {
       getByLabelText,
       getByTestId,
-    } = render(
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    )
-
+    } = renderWithStore(<App/>)
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
     ]
@@ -69,18 +65,12 @@ describe('Todo App',()=>{
 
 
   test('Can update todos [U]', () =>{
-    const store = createStore(rootReducer)
     const {
       getByLabelText,
       getByText,
       getByTestId,
       getAllByTestId
-      } = render(
-        <Provider store={store}>
-          <App/>
-        </Provider>
-      )
-
+      } = renderWithStore(<App/>)
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
     ]
@@ -115,16 +105,11 @@ describe('Todo App',()=>{
 
 
   test('Can deleted todos [D]', () =>{
-    const store = createStore(rootReducer)
     const {
       getByLabelText,
       getByTestId,
       getAllByTestId
-      } = render(
-        <Provider store={store}>
-          <App/>
-        </Provider>
-      )
+      } = renderWithStore(<App/>)
 
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'

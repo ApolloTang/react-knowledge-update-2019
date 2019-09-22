@@ -15,15 +15,12 @@ declare global {
 
 
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
-import {rootReducer} from './root-reducer'
+import store from './store'
+
 import App from './app'
 
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+
 
 // =====================================
 ReactDOM.render(
