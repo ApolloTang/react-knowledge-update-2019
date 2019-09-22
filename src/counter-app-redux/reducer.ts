@@ -7,11 +7,6 @@ interface State {
   readonly count: number
 }
 
-interface UnknownAction {
-  type?:unknown
-  payload?: any
-}
-
 const initialState:State = {count:0}
 
 function reducer(
