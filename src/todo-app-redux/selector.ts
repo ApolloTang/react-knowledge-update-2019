@@ -2,22 +2,41 @@ import { Dispatch } from 'redux'
 
 import {ACrtors_Todos} from './action'
 
-import {Todos as Store} from './reducer'
-
+import {Store} from './type'
 
 const mapStoreToProps = (store:Store) => {
   return {todos: store.todos}
 }
 
-const mapDispatchToProps = (dispatch:Dispatch) => (
-  {
-    dispatch_addTodo(text:string)  {
-      const newId:string = Date.now()+''
-      dispatch(ACrtors_Todos.ACrtor_add(newId, text))
-    },
-    dispatch_deleteTodo(id:string) { dispatch(ACrtors_Todos.ACrtor_delete(id)) },
-    dispatch_toggleTodo(id:string) { dispatch(ACrtors_Todos.ACrtor_toggle(id)) },
-  }
-)
+interface TDispatch {
+  addTodo: (text:string) => void
+  deleteTodo: (id:string) => void
+  toggleTodo: (id:string) => void
+}
 
-export {mapStoreToProps, mapDispatchToProps}
+
+const mapDispatchToProps = (dispatch:Dispatch) => {
+
+  const dispatch_addTodo:TDispatch['addTodo'] = (text) => {
+    const newId:string = Date.now()+''
+    dispatch(ACrtors_Todos.ACrtor_add(newId, text))
+  }
+  const dispatch_deleteTodo:TDispatch['deleteTodo'] = (id) => {
+    dispatch(ACrtors_Todos.ACrtor_delete(id))
+  }
+  const dispatch_toggleTodo:TDispatch['toggleTodo'] = (id) => {
+    dispatch(ACrtors_Todos.ACrtor_toggle(id))
+  }
+
+  return {
+    dispatch_addTodo,
+    dispatch_deleteTodo,
+    dispatch_toggleTodo
+  }
+}
+
+export {
+  TDispatch,
+  mapStoreToProps,
+  mapDispatchToProps
+}

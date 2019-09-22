@@ -3,6 +3,7 @@ import {useState} from 'react'
 import {connect} from 'react-redux'
 
 import {
+  TDispatch,
   mapStoreToProps, mapDispatchToProps
 } from './selector'
 
@@ -11,13 +12,7 @@ interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
   'new-todo': HTMLInputElement
 }
 
-interface Todo {
-  id: string
-  text: string
-  completed: boolean
-}
-
-type Todos = Todo[]
+import {Todo, Todos} from './reducer'
 
 interface TodosProps {
   todo: Todo
@@ -42,13 +37,17 @@ const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
 
 interface AppProps {
   todos: Todos
+  dispatch_addTodo:TDispatch['addTodo']
+  dispatch_deleteTodo:TDispatch['deleteTodo']
+  dispatch_toggleTodo:TDispatch['toggleTodo']
 }
+
 const App = ({
   todos,
   dispatch_addTodo,
   dispatch_deleteTodo,
   dispatch_toggleTodo
-}) => {
+}:AppProps) => {
   const [todoInputText, setTodoInputText] = useState<string>('')
 
   const handle_newTodoChange = (e:React.FormEvent) => {

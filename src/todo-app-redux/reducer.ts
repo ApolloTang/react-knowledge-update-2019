@@ -51,7 +51,7 @@ function todosReducer(
 }
 
 export {
-  Todos,
+  Todos, Todo,
   initialState,
 }
 export default todosReducer
