@@ -2,12 +2,14 @@ import reducer,  {
   initialState,
 } from './reducer'
 import {
-  ACrtors_Counter
+  ACrtors_Counter,
+  TACrtors_Counter
 } from './action'
 
 describe('Counter reducer', ()=>{
   it('Should return the initail state', ()=>{
-    expect(reducer(undefined, {})).toEqual(initialState)
+    const nonCounterAction = {} as TACrtors_Counter
+    expect(reducer(undefined, nonCounterAction)).toEqual(initialState)
   })
 
   it('Should increase counter', ()=>{
