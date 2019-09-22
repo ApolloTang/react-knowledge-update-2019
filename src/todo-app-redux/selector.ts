@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 
 import {ACrtors_Todos} from './action'
 
-import {Store} from './type'
+import {Store} from './store'
 
 const mapStoreToProps = (store:Store) => {
   return {todos: store.todos}

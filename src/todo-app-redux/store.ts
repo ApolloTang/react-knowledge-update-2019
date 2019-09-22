@@ -1,7 +1,9 @@
 import {createStore} from 'redux'
 import {combineReducers} from 'redux'
 
-import todosReducer from './reducer'
+import todosReducer, {
+  Todos
+} from './reducer'
 
 
 const rootReducer = combineReducers(
@@ -10,10 +12,17 @@ const rootReducer = combineReducers(
   }
 )
 
+interface Store {
+  todos: Todos
+}
+
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 export default store
-export {rootReducer}
+export {
+  Store,
+  rootReducer
+}
