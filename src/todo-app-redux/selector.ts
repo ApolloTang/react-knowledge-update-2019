@@ -6,8 +6,7 @@ import {Todos as Store} from './reducer'
 
 
 const mapStoreToProps = (store:Store) => {
-  const todos = store
-  return {todos}
+  return {todos: store.todos}
 }
 
 const mapDispatchToProps = (dispatch:Dispatch) => (

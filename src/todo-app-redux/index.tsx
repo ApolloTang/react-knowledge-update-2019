@@ -15,14 +15,19 @@ declare global {
 
 
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import {createStore, combineReducers} from 'redux'
 
 import App from './app'
-import reducer from './reducer'
+import todosReducer from './reducer'
 
+const rootReducer = combineReducers(
+  {
+    todos:todosReducer
+  }
+)
 
 const store = createStore(
-  reducer,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

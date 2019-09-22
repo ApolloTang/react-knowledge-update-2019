@@ -15,7 +15,7 @@ type Todos = ReadonlyArray<Todo>
 const initialState:Todos = []
 
 
-function reducer(
+function todosReducer(
   state:Todos = initialState,
   action:TACrtors_Todos
 ):Todos {
@@ -54,4 +54,4 @@ export {
   Todos,
   initialState,
 }
-export default reducer
+export default todosReducer
