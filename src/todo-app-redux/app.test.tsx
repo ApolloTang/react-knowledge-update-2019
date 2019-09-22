@@ -1,22 +1,34 @@
 import React from 'react'
 import {render, fireEvent, within, getNodeText} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import {rootReducer} from './root-reducer'
 import App from './app'
 
 describe('Todo App',()=>{
   test('Render a "Adding todo" input field', () =>{
+    const store = createStore(rootReducer)
     const {
       getByLabelText,
-    } = render(<App/>)
+    } = render(
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    )
     getByLabelText(/add.todo/i)
   })
 
 
   test('Add todo input take user values', () =>{
+    const store = createStore(rootReducer)
     const {
       getByLabelText,
-    } = render(<App/>)
+    } = render(
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    )
     const newTodoInput = getByLabelText(/add.todo/i) as HTMLInputElement
     const todo1 = 'learn react'
     userEvent.type(newTodoInput, todo1)
@@ -25,10 +37,15 @@ describe('Todo App',()=>{
 
 
   test('Can create todos [CR]', () =>{
+    const store = createStore(rootReducer)
     const {
       getByLabelText,
       getByTestId,
-    } = render(<App/>)
+    } = render(
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    )
 
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
@@ -52,12 +69,17 @@ describe('Todo App',()=>{
 
 
   test('Can update todos [U]', () =>{
+    const store = createStore(rootReducer)
     const {
       getByLabelText,
       getByText,
       getByTestId,
       getAllByTestId
-    } = render(<App/>)
+      } = render(
+        <Provider store={store}>
+          <App/>
+        </Provider>
+      )
 
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
@@ -93,11 +115,16 @@ describe('Todo App',()=>{
 
 
   test('Can deleted todos [D]', () =>{
+    const store = createStore(rootReducer)
     const {
       getByLabelText,
       getByTestId,
       getAllByTestId
-    } = render(<App/>)
+      } = render(
+        <Provider store={store}>
+          <App/>
+        </Provider>
+      )
 
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
