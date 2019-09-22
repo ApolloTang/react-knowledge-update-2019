@@ -5,7 +5,7 @@ import {
   ACrtors_Counter
 } from './action'
 
-describe('Todo reducer', ()=>{
+describe('Counter reducer', ()=>{
   it('Should return the initail state', ()=>{
     expect(reducer(undefined, {})).toEqual(initialState)
   })
