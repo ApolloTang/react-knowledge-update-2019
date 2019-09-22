@@ -1,5 +1,11 @@
 import React from 'react'
 import {useState} from 'react'
+import {connect} from 'react-redux'
+
+import {
+  mapStoreToProps, mapDispatchToProps
+} from './selector'
+
 
 interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
   'new-todo': HTMLInputElement
@@ -34,8 +40,15 @@ const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
   )
 }
 
-const App = () => {
-  const [todos, setTodos] = useState<Todos>([])
+interface AppProps {
+  todos: Todos
+}
+const App = ({
+  todos,
+  dispatch_addTodo,
+  dispatch_deleteTodo,
+  dispatch_toggleTodo
+}) => {
   const [todoInputText, setTodoInputText] = useState<string>('')
 
   const handle_newTodoChange = (e:React.FormEvent) => {
@@ -49,26 +62,16 @@ const App = () => {
     const formElements =  (e.target as HTMLFormElement).elements as ExtendedHTMLFormElement
     const newTodoText = formElements['new-todo'].value
 
-    const newTodo:Todo = {
-      id: Date.now()+'',
-      text: newTodoText,
-      completed: false
-    }
-
-    setTodos(prevTodos => [...prevTodos, newTodo])
+    dispatch_addTodo(newTodoText)
     setTodoInputText('')
   }
 
   const handle_delete = (id:string) => () => {
-    setTodos(prevTodos => prevTodos.filter(todo=>todo.id !== id))
+    dispatch_deleteTodo(id)
   }
 
   const handle_toggle = (id:string) => () => {
-    setTodos(prevTodos => prevTodos.map((prevTodo:Todo)=>{
-      return (id === prevTodo.id)
-        ? {...prevTodo, completed: !prevTodo.completed }
-        : prevTodo
-    }))
+    dispatch_toggleTodo(id)
   }
 
   return (
@@ -89,7 +92,7 @@ const App = () => {
       <div data-testid="todo-list">
         {
           todos.map(
-            todo=>(
+            (todo)=>(
               <TodoItem
                 key={todo.id}
                 todo={todo}
@@ -104,4 +107,8 @@ const App = () => {
   )
 }
 
-export default App
+
+export default connect(
+  mapStoreToProps,
+  mapDispatchToProps
+)(App)
