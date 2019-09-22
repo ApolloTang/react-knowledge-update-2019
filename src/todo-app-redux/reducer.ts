@@ -12,11 +12,6 @@ interface Todo {
 type Todos = ReadonlyArray<Todo>
 
 
-interface UnknownAction {
-  type?:unknown
-  payload?: any
-}
-
 const initialState:Todos = []
 
 
