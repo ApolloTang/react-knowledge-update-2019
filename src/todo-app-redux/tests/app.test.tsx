@@ -3,8 +3,8 @@ import {render, fireEvent, within, getNodeText} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
-import {rootReducer} from './store'
-import App from './app'
+import {rootReducer} from '../store'
+import App from '../app'
 
 function renderWithStore(
   ui:React.ReactNode,

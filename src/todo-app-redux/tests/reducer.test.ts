@@ -1,11 +1,11 @@
 import reducer,  {
   initialState,
   Todos
-} from './reducer'
+} from '../reducer'
 import {
   TACrtors_Todos,
   ACrtors_Todos
-} from './action'
+} from '../action'
 
 
 describe('Todo reducer', ()=>{

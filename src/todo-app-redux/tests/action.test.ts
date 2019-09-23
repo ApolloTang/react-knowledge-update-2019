@@ -1,7 +1,7 @@
 import {
   ANames_Todos,
   ACrtors_Todos
-} from './action'
+} from '../action'
 
 
 describe('Todo action', ()=>{

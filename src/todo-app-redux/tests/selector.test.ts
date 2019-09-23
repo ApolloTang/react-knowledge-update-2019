@@ -3,10 +3,10 @@ import configureStore from 'redux-mock-store'
 import {
   mapStoreToProps,
   mapDispatchToProps
-} from  './selector'
-import {Store} from './store'
+} from  '../selector'
+import {Store} from '../store'
 
-import {ACrtors_Todos} from './action'
+import {ACrtors_Todos} from '../action'
 
 
 describe('Todo selector, mapStoreToProps', ()=>{
