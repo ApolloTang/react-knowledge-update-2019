@@ -1,10 +1,12 @@
 import {createStore} from 'redux'
-import {combineReducers} from 'redux'
+import {combineReducers, applyMiddleware,  compose} from 'redux'
+import thunk from 'redux-thunk'
 
 import todosReducer, {
   Todos
 } from './reducer'
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose
 
 const rootReducer = combineReducers(
   {
@@ -18,7 +20,9 @@ interface Store {
 
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(
+    applyMiddleware(...[thunk])
+  )
 )
 
 export default store

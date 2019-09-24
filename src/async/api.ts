@@ -22,7 +22,8 @@ export default {
 }
 
 export {
-  Post
+  Post,
+  ApiError
 }
 
 
