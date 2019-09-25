@@ -2,6 +2,7 @@
 interface TpostData {
   author: string
   title: string
+  id: string
 }
 
 interface Tpost {
@@ -22,7 +23,16 @@ interface TserializedPosts {
 
 
 const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
-  posts: json.data.children.map((child:Tpost):TpostData => child.data),
+  posts: json.data.children.map(
+    (child:Tpost):TpostData => {
+      const dataRaw = child.data
+      return {
+        author: dataRaw && dataRaw.author,
+        title: dataRaw && dataRaw.title,
+        id: dataRaw && dataRaw.id
+      }
+    }
+  ),
   receivedAt: Date.now()
 })
 
