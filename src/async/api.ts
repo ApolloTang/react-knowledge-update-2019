@@ -1,7 +1,12 @@
 type Post = string
 type ApiError = string
 
-const getPost = (): Promise<Post> => {
+const sleep = () => new Promise((rs)=>{
+  setTimeout(rs, 2000)
+})
+
+const getPost = async(): Promise<Post> => {
+  await sleep()
   console.log('http get post')
   return new Promise((rs, rj)=>{
     const error = false

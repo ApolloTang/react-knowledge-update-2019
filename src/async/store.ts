@@ -6,22 +6,22 @@ import todosReducer, {
   Todos
 } from './reducer'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose
-
-const rootReducer = combineReducers(
-  {
-    todos:todosReducer
-  }
-)
-
 interface Store {
   todos: Todos
 }
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const rootReducer = combineReducers(
+  {
+    todos: function(s={a:'a'}, a) {return s}
+  }
+)
+
 const store = createStore(
   rootReducer,
   composeEnhancers(
-    applyMiddleware(...[thunk])
+    applyMiddleware(thunk)
   )
 )
 

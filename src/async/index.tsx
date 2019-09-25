@@ -9,7 +9,7 @@ document.body.appendChild(container)
 
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__COMPOSE__:any
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__:any
   }
 }
 
