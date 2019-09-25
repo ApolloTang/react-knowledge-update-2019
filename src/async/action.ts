@@ -1,6 +1,6 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import {Store} from './store'
-import Api, { Post, ApiError } from './api'
+import Api, { TapiPosts, TapiPostsError } from './api'
 
 
 //
@@ -15,11 +15,11 @@ enum ANames {
 const action_fetchSubReddit_start = () => ({
   type: ANames.fetchSubReddit_start as ANames.fetchSubReddit_start
 })
-const action_fetchSubReddit_success = (post:Post) => ({
+const action_fetchSubReddit_success = (posts:TapiPosts) => ({
   type: ANames.fetchSubReddit_success as ANames.fetchSubReddit_success,
-  payload: post
+  payload: posts
 })
-const action_fetchSubReddit_fail = (error:ApiError) => ({
+const action_fetchSubReddit_fail = (error:TapiPostsError) => ({
   type: ANames.fetchSubReddit_fail as ANames.fetchSubReddit_fail,
   error
 })
@@ -32,19 +32,19 @@ type Actions_fetchSubReddit =
 
 
 const thunk_fetchSubRedditPosts =
-  ():ThunkAction<Promise<Post>, Store, {}, Actions_fetchSubReddit> =>
+  ():ThunkAction<Promise<TapiPosts>, Store, {}, Actions_fetchSubReddit> =>
   async (
     dispatch:ThunkDispatch<Store, {}, Actions_fetchSubReddit>,
-  ):Promise<Post> => {
+  ):Promise<TapiPosts> => {
     dispatch( action_fetchSubReddit_start() )
-    let post = ''
+    let posts = undefined
     try {
-       post = await Api.subReddit.getPost()
-      dispatch( action_fetchSubReddit_success(post) )
+      posts = await Api.subReddit.getPosts()
+      dispatch( action_fetchSubReddit_success(posts) )
     } catch (error) {
       dispatch( action_fetchSubReddit_fail(error) )
     }
-    return post
+    return posts
 }
 
 
