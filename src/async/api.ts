@@ -56,7 +56,6 @@ const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
 
 
 const getPosts = async():Promise<TserializedPosts> => {
-  console.log('get post called')
   const response = await fetch('https://www.reddit.com/r/reactjs.json')
   if (!response.ok) {
     throw new Error('HTTP error, status = ' + response.status)
@@ -71,12 +70,10 @@ const subReddit = {
   getPosts
 }
 
-export default {
-  subReddit
-}
 
 type TapiPosts = undefined|TserializedPosts
 type TapiPostsError = undefined|string
+
 
 export {
   TapiPostsError,
@@ -85,5 +82,6 @@ export {
   TserializedPosts,
   TapiPosts
 }
-
-
+export default {
+  subReddit
+}

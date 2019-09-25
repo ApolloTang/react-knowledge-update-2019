@@ -1,48 +1,47 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import {Store} from './store'
-import Api, { TapiPosts, TapiPostsError } from './api'
+import api, { TapiPosts, TapiPostsError } from './api'
 
 
 //
 //  Fetch SubReddit
 //
-enum ANames {
-  fetchSubReddit_start = 'fetchSubReddit_start',
-  fetchSubReddit_success = 'fetchSubReddit_success',
-  fetchSubReddit_fail = 'fetchSubReddit_fail',
+enum TactionNames {
+  fetchSubreddit_start = 'fetchSubreddit_start',
+  fetchSubreddit_success = 'fetchSubreddit_success',
+  fetchSubreddit_fail = 'fetchSubreddit_fail',
 }
 
-const action_fetchSubReddit_start = () => ({
-  type: ANames.fetchSubReddit_start as ANames.fetchSubReddit_start
+const action_fetchSubreddit_start = () => ({
+  type: TactionNames.fetchSubreddit_start as TactionNames.fetchSubreddit_start
 })
-const action_fetchSubReddit_success = (posts:TapiPosts) => ({
-  type: ANames.fetchSubReddit_success as ANames.fetchSubReddit_success,
+const action_fetchSubreddit_success = (posts:TapiPosts) => ({
+  type: TactionNames.fetchSubreddit_success as TactionNames.fetchSubreddit_success,
   payload: posts
 })
-const action_fetchSubReddit_fail = (error:TapiPostsError) => ({
-  type: ANames.fetchSubReddit_fail as ANames.fetchSubReddit_fail,
+const action_fetchSubreddit_fail = (error:TapiPostsError) => ({
+  type: TactionNames.fetchSubreddit_fail as TactionNames.fetchSubreddit_fail,
   error
 })
 
-type Actions_fetchSubReddit =
-  ReturnType<typeof action_fetchSubReddit_start> |
-  ReturnType<typeof action_fetchSubReddit_success> |
-  ReturnType<typeof action_fetchSubReddit_fail> |
-  ReturnType<typeof action_refreshSubRedditPosts>
+type Tactions_fetchSubreddit =
+  ReturnType<typeof action_fetchSubreddit_start> |
+  ReturnType<typeof action_fetchSubreddit_success> |
+  ReturnType<typeof action_fetchSubreddit_fail>
 
 
-const thunk_fetchSubRedditPosts =
-  ():ThunkAction<Promise<TapiPosts>, Store, {}, Actions_fetchSubReddit> =>
+const thunk_fetchSubreddit =
+  ():ThunkAction<Promise<TapiPosts>, Store, {}, Tactions_fetchSubreddit> =>
   async (
-    dispatch:ThunkDispatch<Store, {}, Actions_fetchSubReddit>,
+    dispatch:ThunkDispatch<Store, {}, Tactions_fetchSubreddit>,
   ):Promise<TapiPosts> => {
-    dispatch( action_fetchSubReddit_start() )
+    dispatch( action_fetchSubreddit_start() )
     let posts:TapiPosts = undefined
     try {
-      posts = await Api.subReddit.getPosts()
-      dispatch( action_fetchSubReddit_success(posts) )
+      posts = await api.subReddit.getPosts()
+      dispatch( action_fetchSubreddit_success(posts) )
     } catch (error) {
-      dispatch( action_fetchSubReddit_fail(error.toString()))
+      dispatch( action_fetchSubreddit_fail(error.toString()))
     }
     return posts
 }
@@ -51,32 +50,31 @@ const thunk_fetchSubRedditPosts =
 //
 //  refresh SubReddit
 //
-enum ANames {
+enum TactionNames {
   refreshSubReddit = 'refreshSubReddit'
 }
-const action_refreshSubRedditPosts = () => ({
-  type: ANames.refreshSubReddit as ANames.refreshSubReddit,
+const action_refreshSubreddit = () => ({
+  type: TactionNames.refreshSubReddit as TactionNames.refreshSubReddit,
 })
 
-type Actions_refreshSubReddit =
-  ReturnType<typeof action_refreshSubRedditPosts>
+type Tactions_refreshSubreddit =
+  ReturnType<typeof action_refreshSubreddit>
 
-const thunk_refreshSubredditPosts =
-  ():ThunkAction<void, Store, {}, Actions_refreshSubReddit> =>
-  ( dispatch: ThunkDispatch<Store, {}, Actions_refreshSubReddit>):void => {
-
-    dispatch(action_refreshSubRedditPosts())
-    dispatch(thunk_fetchSubRedditPosts())
+const thunk_refreshSubreddit =
+  ():ThunkAction<void, Store, {}, Tactions_refreshSubreddit> =>
+  ( dispatch: ThunkDispatch<Store, {}, Tactions_refreshSubreddit>):void => {
+    dispatch(action_refreshSubreddit())
+    dispatch(thunk_fetchSubreddit())
   }
 
 const actions = {
-  thunk_fetchSubRedditPosts,
-  thunk_refreshSubredditPosts
+  thunk_fetchSubreddit,
+  thunk_refreshSubreddit
 }
 
 export {
-  ANames,
+  TactionNames,
   actions,
-  Actions_fetchSubReddit,
-  Actions_refreshSubReddit
+  Tactions_fetchSubreddit,
+  Tactions_refreshSubreddit
 }

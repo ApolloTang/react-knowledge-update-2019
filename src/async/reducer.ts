@@ -1,6 +1,6 @@
 import {
-  ANames,
-  Actions_fetchSubReddit
+  TactionNames,
+  Tactions_fetchSubreddit
 } from './action'
 
 import {
@@ -22,17 +22,17 @@ const initialState:TreducerSubreddit = {
 
 function reducerSubreddit(
   state:TreducerSubreddit = initialState,
-  action:Actions_fetchSubReddit
+  action:Tactions_fetchSubreddit
 ):TreducerSubreddit {
   switch (action.type) {
-    case ANames.fetchSubReddit_start: {
+    case TactionNames.fetchSubreddit_start: {
       type Tstart = typeof action
       return {
         ...state,
         isLoading: true
       }
     }
-    case ANames.fetchSubReddit_success: {
+    case TactionNames.fetchSubreddit_success: {
       type Tsuccess = typeof action
       const posts = action && action.payload && action.payload.posts
       const receivedAt = action && action.payload && action.payload.receivedAt
@@ -44,7 +44,7 @@ function reducerSubreddit(
         errorMsg: undefined
       }
     }
-    case ANames.fetchSubReddit_fail: {
+    case TactionNames.fetchSubreddit_fail: {
       type Tfail = typeof action
       const error = action && action.error
       return {

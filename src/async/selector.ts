@@ -2,8 +2,8 @@ import { ThunkDispatch } from 'redux-thunk'
 
 import {
   actions,
-  Actions_fetchSubReddit,
-  Actions_refreshSubReddit
+  Tactions_fetchSubreddit,
+  Tactions_refreshSubreddit
 } from './action'
 
 import {Store} from './store'
@@ -18,15 +18,15 @@ interface TDispatch {
   toggleTodo: (id:string) => void
 }
 
-type Actions = Actions_fetchSubReddit | Actions_refreshSubReddit
+type Tactions = Tactions_fetchSubreddit | Tactions_refreshSubreddit
 
-const mapDispatchToProps = (dispatch:ThunkDispatch<Store, {}, Actions>) => {
+const mapDispatchToProps = (dispatch:ThunkDispatch<Store, {}, Tactions>) => {
   const dispatch_fetchSubredditPosts = () => {
-    dispatch(actions.thunk_fetchSubRedditPosts())
+    dispatch(actions.thunk_fetchSubreddit())
   }
 
   const dispatch_refreshSubredditPosts = () => {
-    dispatch(actions.thunk_refreshSubredditPosts())
+    dispatch(actions.thunk_refreshSubreddit())
   }
   return {
     dispatch_fetchSubredditPosts,
