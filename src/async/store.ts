@@ -2,19 +2,19 @@ import {createStore} from 'redux'
 import {combineReducers, applyMiddleware,  compose} from 'redux'
 import thunk from 'redux-thunk'
 
-import todosReducer, {
-  Todos
+import reducerSubreddit, {
+  TreducerSubreddit
 } from './reducer'
 
 interface Store {
-  todos: Todos
+  Subreddit: TreducerSubreddit
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers(
   {
-    todos: function(s={a:'a'}, a) {return s}
+    Subreddit: reducerSubreddit
   }
 )
 

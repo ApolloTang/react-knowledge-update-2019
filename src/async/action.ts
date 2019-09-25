@@ -37,12 +37,12 @@ const thunk_fetchSubRedditPosts =
     dispatch:ThunkDispatch<Store, {}, Actions_fetchSubReddit>,
   ):Promise<TapiPosts> => {
     dispatch( action_fetchSubReddit_start() )
-    let posts = undefined
+    let posts:TapiPosts = undefined
     try {
       posts = await Api.subReddit.getPosts()
       dispatch( action_fetchSubReddit_success(posts) )
     } catch (error) {
-      dispatch( action_fetchSubReddit_fail(error) )
+      dispatch( action_fetchSubReddit_fail(error.toString()))
     }
     return posts
 }
