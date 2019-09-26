@@ -47,7 +47,7 @@ const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
 
 // mock getPost
 const getPosts = async():Promise<TserializedPosts> => {
-  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 2000) })
+  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 3000) })
 
   const response = new Promise<TsubredditInJson>((rs, rj)=>{
     const error = false
@@ -57,7 +57,9 @@ const getPosts = async():Promise<TserializedPosts> => {
       rs(mockData)
     }
   })
-  await sleep
+  console.log('mock fetching')
+  await sleep()
+  console.log('mock fetching completed')
   const subredditInJson = (await response)
   const data = serializedPosts(subredditInJson)
   return data

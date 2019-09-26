@@ -8,7 +8,7 @@ import {
 import {Store} from './store'
 
 const mapStoreToProps = (store:Store) => {
-  return {todos: store.todos}
+  return {subreddit: store.subreddit}
 }
 
 interface TDispatch {
