@@ -47,34 +47,15 @@ const thunk_fetchSubreddit =
 }
 
 
-//
-//  refresh SubReddit
-//
-enum TactionNames {
-  refreshSubReddit = 'refreshSubReddit'
-}
-const action_refreshSubreddit = () => ({
-  type: TactionNames.refreshSubReddit as TactionNames.refreshSubReddit,
-})
-
-type Tactions_refreshSubreddit =
-  ReturnType<typeof action_refreshSubreddit>
-
-const thunk_refreshSubreddit =
-  ():ThunkAction<void, Store, {}, Tactions_refreshSubreddit> =>
-  ( dispatch: ThunkDispatch<Store, {}, Tactions_refreshSubreddit>):void => {
-    dispatch(action_refreshSubreddit())
-    dispatch(thunk_fetchSubreddit())
-  }
-
 const actions = {
   thunk_fetchSubreddit,
-  thunk_refreshSubreddit
+  // thunk_postSubreddit  //<-- can have more thunk or action
 }
+type Tactions = Tactions_fetchSubreddit
+  // | thunk_postSubreddit  // <-- combine all types of action or thunk
 
 export {
   TactionNames,
+  Tactions,
   actions,
-  Tactions_fetchSubreddit,
-  Tactions_refreshSubreddit
 }

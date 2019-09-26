@@ -11,13 +11,14 @@ import {
 
 const App = ({
   dispatch_fetchSubredditPosts,
-  dispatch_refreshSubredditPosts
+  // dispatch_refreshSubredditPosts
 }:{
   dispatch_fetchSubredditPosts:any //@TODO fixme
-  dispatch_refreshSubredditPosts:any //@TODO fixme
+  // dispatch_refreshSubredditPosts:any //@TODO fixme
 }) => {
   const handle_refresh = () => {
-    dispatch_refreshSubredditPosts()
+    // dispatch_refreshSubredditPosts()
+    dispatch_fetchSubredditPosts()
   }
 
   useEffect(()=>{

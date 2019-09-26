@@ -1,6 +1,6 @@
 import {
   TactionNames,
-  Tactions_fetchSubreddit
+  Tactions
 } from './action'
 
 import {
@@ -22,7 +22,7 @@ const initialState:TreducerSubreddit = {
 
 function reducerSubreddit(
   state:TreducerSubreddit = initialState,
-  action:Tactions_fetchSubreddit
+  action:Tactions
 ):TreducerSubreddit {
   switch (action.type) {
     case TactionNames.fetchSubreddit_start: {
