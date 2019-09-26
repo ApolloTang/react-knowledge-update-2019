@@ -7,23 +7,23 @@ import {
   TpostData,
 } from './api'
 
-interface TreducerSubreddit {
+interface Treducer {
   posts: undefined|TpostData[]
   receivedAt: undefined|number
   isLoading: boolean
   errorMsg: undefined|string
 }
-const initialState:TreducerSubreddit = {
+const initialState:Treducer = {
   posts: undefined,
   receivedAt: undefined,
   isLoading: false,
   errorMsg: undefined
 }
 
-function reducerSubreddit(
-  state:TreducerSubreddit = initialState,
+function reducer(
+  state:Treducer = initialState,
   action:Tactions
-):TreducerSubreddit {
+):Treducer {
   switch (action.type) {
     case TactionNames.fetchSubreddit_start: {
       type Tstart = typeof action
@@ -61,6 +61,6 @@ function reducerSubreddit(
 
 export {
   initialState,
-  TreducerSubreddit
+  reducer,
+  Treducer
 }
-export default reducerSubreddit
