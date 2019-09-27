@@ -40,8 +40,8 @@ const mockResponse = {
   status: 200
 } as unknown as Response
 const mockFetch = () => new Promise<Response>( async (rs)=>{ // eslint-disable-line
-  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 5000) })
-  const MOCK_ERROR = false
+  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 2000) })
+  const MOCK_ERROR = true
   if (MOCK_ERROR) {
     (mockResponse as unknown as Mutable<Response>).ok = false
     ;(mockResponse as unknown as Mutable<Response>).status = 500
@@ -96,9 +96,9 @@ type TapiPostsError = undefined|string
 
 export {
   TapiPostsError,
-  Tpost,
+  // Tpost,
   TpostData,
-  TserializedPosts,
+  // TserializedPosts,
   TapiPosts
 }
 export default {
