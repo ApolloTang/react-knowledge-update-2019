@@ -20,6 +20,10 @@ interface TserializedPosts {
   receivedAt: number
 }
 
+
+// ===============
+// Mock HTTP fetch
+// ===============
 const mockData:TsubredditInJson = {
   data: {
     children: [
@@ -28,26 +32,29 @@ const mockData:TsubredditInJson = {
     ]
   }
 }
+type Mutable<T> = { -readonly [P in keyof T ]: T[P] }
 const mockResponse = {
   data: mockData,
-  json: function(){return this.data},
-  ok: true
-}
-const mockFetch = () => new Promise<any>((rs, rj)=>{
-  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 3000) })
-  const error = false
-  if (error) {
-    mockResponse.ok = false
-    mockResponse.data = undefined // @TODO fix type
-    sleep()
-    rj(mockResponse)
+  json: function(){return (this as any).data},
+  ok: true,
+  status: 200
+} as unknown as Response
+const mockFetch = () => new Promise<Response>( async (rs)=>{ // eslint-disable-line
+  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 5000) })
+  const MOCK_ERROR = false
+  if (MOCK_ERROR) {
+    (mockResponse as unknown as Mutable<Response>).ok = false
+    ;(mockResponse as unknown as Mutable<Response>).status = 500
+    // above force readonly to readable see:
+    // https://stackoverflow.com/questions/50703834/typescript-make-readonly-properties-writeable
+    await sleep()
+    rs(mockResponse)
   } else {
-    console.log('sleeping')
-    sleep()
-    console.log('wake')
+    await sleep()
     rs(mockResponse)
   }
 })
+
 
 
 const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
@@ -64,27 +71,6 @@ const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
   receivedAt: Date.now()
 })
 
-
-// // mock getPost
-// const getPosts = async():Promise<TserializedPosts> => {
-//   const sleep = () => new Promise((rs)=>{ setTimeout(rs, 3000) })
-//
-//   const response = new Promise<TsubredditInJson>((rs, rj)=>{
-//     const error = false
-//     if (error) {
-//       rj('error')
-//     } else {
-//       rs(mockResponse.json())
-//     }
-//   })
-//
-//   console.log('mock fetching')
-//   await sleep()
-//   console.log('mock fetching completed')
-//   const subredditInJson = (await response)
-//   const data = serializedPosts(subredditInJson)
-//   return data
-// }
 
 
 const getPosts = async():Promise<TserializedPosts> => {
