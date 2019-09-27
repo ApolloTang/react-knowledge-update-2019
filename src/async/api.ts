@@ -28,6 +28,26 @@ const mockData:TsubredditInJson = {
     ]
   }
 }
+const mockResponse = {
+  data: mockData,
+  json: function(){return this.data},
+  ok: true
+}
+const mockFetch = () => new Promise<any>((rs, rj)=>{
+  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 3000) })
+  const error = false
+  if (error) {
+    mockResponse.ok = false
+    mockResponse.data = undefined // @TODO fix type
+    sleep()
+    rj(mockResponse)
+  } else {
+    console.log('sleeping')
+    sleep()
+    console.log('wake')
+    rs(mockResponse)
+  }
+})
 
 
 const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
@@ -45,36 +65,38 @@ const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
 })
 
 
-// mock getPost
-const getPosts = async():Promise<TserializedPosts> => {
-  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 3000) })
-
-  const response = new Promise<TsubredditInJson>((rs, rj)=>{
-    const error = false
-    if (error) {
-      rj('error')
-    } else {
-      rs(mockData)
-    }
-  })
-  console.log('mock fetching')
-  await sleep()
-  console.log('mock fetching completed')
-  const subredditInJson = (await response)
-  const data = serializedPosts(subredditInJson)
-  return data
-}
-
-
+// // mock getPost
 // const getPosts = async():Promise<TserializedPosts> => {
-//   const response = await fetch('https://www.reddit.com/r/reactjs.json')
-//   if (!response.ok) {
-//     throw new Error('HTTP error, status = ' + response.status)
-//   }
-//   const subredditInJson = await response.json()
+//   const sleep = () => new Promise((rs)=>{ setTimeout(rs, 3000) })
+//
+//   const response = new Promise<TsubredditInJson>((rs, rj)=>{
+//     const error = false
+//     if (error) {
+//       rj('error')
+//     } else {
+//       rs(mockResponse.json())
+//     }
+//   })
+//
+//   console.log('mock fetching')
+//   await sleep()
+//   console.log('mock fetching completed')
+//   const subredditInJson = (await response)
 //   const data = serializedPosts(subredditInJson)
 //   return data
 // }
+
+
+const getPosts = async():Promise<TserializedPosts> => {
+  // const response = await fetch('https://www.reddit.com/r/reactjs.json')
+  const response = await mockFetch()
+  if (!response.ok) {
+    throw new Error('HTTP error, status = ' + response.status)
+  }
+  const subredditInJson = await response.json()
+  const data = serializedPosts(subredditInJson)
+  return data
+}
 
 
 const subReddit = {
