@@ -29,7 +29,8 @@ function reducer(
       type Tstart = typeof action
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        errorMsg: undefined
       }
     }
     case TactionNames.fetchSubreddit_success: {
