@@ -1,5 +1,6 @@
 import fetchMock from 'fetch-mock'
 
+
 interface TpostData {
   author: string
   title: string
@@ -21,6 +22,10 @@ interface TserializedPosts {
   receivedAt: number
 }
 
+
+// ===============
+// Mock HTTP fetch
+// ===============
 const mockData:TsubredditInJson = {
   data: {
     children: [
@@ -29,6 +34,28 @@ const mockData:TsubredditInJson = {
     ]
   }
 }
+type Mutable<T> = { -readonly [P in keyof T ]: T[P] }
+const mockResponse = {
+  data: mockData,
+  json: function(){return (this as any).data},
+  ok: true,
+  status: 200
+} as unknown as Response
+const mockFetch = () => new Promise<Response>( async (rs)=>{ // eslint-disable-line
+  const sleep = () => new Promise((rs)=>{ setTimeout(rs, 2000) })
+  const MOCK_ERROR = true
+  if (MOCK_ERROR) {
+    (mockResponse as unknown as Mutable<Response>).ok = false
+    ;(mockResponse as unknown as Mutable<Response>).status = 500
+    // above force readonly to readable see:
+    // https://stackoverflow.com/questions/50703834/typescript-make-readonly-properties-writeable
+    await sleep()
+    rs(mockResponse)
+  } else {
+    await sleep()
+    rs(mockResponse)
+  }
+})
 
 
 
@@ -47,10 +74,10 @@ const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
 })
 
 
-fetchMock.get('https://www.reddit.com/r/reactjs.json', mockData)
-// fetchMock.get('https://www.reddit.com/r/reactjs.json', 500)
+fetchMock.get('https://www.reddit.com/r/reactjs.json', mockData);
 const getPosts = async():Promise<TserializedPosts> => {
   const response = await fetch('https://www.reddit.com/r/reactjs.json')
+  // const response = await mockFetch() // <-- this is replace by fetchMock now :)
   if (!response.ok) {
     throw new Error('HTTP error, status = ' + response.status)
   }
