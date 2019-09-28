@@ -5,22 +5,22 @@ import {
   Tactions,
 } from './action'
 
-import { Store } from './store'
+import { Tstore } from './store'
 
 
 interface TmapStoreToProps {
-  subreddit: Store['subreddit']
+  subreddit: Tstore['subreddit']
 }
 
 interface TmapDispatchToProps {
   dispatch_fetchSubredditPosts: () => void
 }
 
-const mapStoreToProps = (store:Store) => {
+const mapStoreToProps = (store:Tstore) => {
   return {subreddit: store.subreddit}
 }
 
-const mapDispatchToProps = (dispatch:ThunkDispatch<Store, {}, Tactions>) => {
+const mapDispatchToProps = (dispatch:ThunkDispatch<Tstore, {}, Tactions>) => {
   const dispatch_fetchSubredditPosts = () => {
     dispatch(actions.thunk_fetchSubreddit())
   }

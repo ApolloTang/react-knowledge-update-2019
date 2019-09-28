@@ -7,7 +7,7 @@ import {
   Treducer as Tsubreddit,
 } from './reducer'
 
-interface Store {
+interface Tstore {
   subreddit:Tsubreddit
 }
 
@@ -28,6 +28,6 @@ const store = createStore(
 
 export default store
 export {
-  Store,
+  Tstore,
   rootReducer
 }

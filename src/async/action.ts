@@ -1,5 +1,5 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
-import {Store} from './store'
+import {Tstore} from './store'
 import api, { TapiPosts, TapiPostsError } from './api'
 
 
@@ -31,9 +31,9 @@ type Tactions_fetchSubreddit =
 
 
 const thunk_fetchSubreddit =
-  ():ThunkAction<Promise<TapiPosts>, Store, {}, Tactions_fetchSubreddit> =>
+  ():ThunkAction<Promise<TapiPosts>, Tstore, {}, Tactions_fetchSubreddit> =>
   async (
-    dispatch:ThunkDispatch<Store, {}, Tactions_fetchSubreddit>,
+    dispatch:ThunkDispatch<Tstore, {}, Tactions_fetchSubreddit>,
   ):Promise<TapiPosts> => {
     dispatch( action_fetchSubreddit_start() )
     let posts:TapiPosts = undefined
