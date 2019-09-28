@@ -24,11 +24,13 @@ interface TserializedPosts {
 const mockData:TsubredditInJson = {
   data: {
     children: [
-      { data:{ author: 'author', title: 'title', id: 'id' } },
-      { data:{ author: 'author', title: 'title', id: 'id' } }
+      { data:{ author: 'author', title: 'title', id: '1' } },
+      { data:{ author: 'author', title: 'title', id: '2' } }
     ]
   }
 }
+fetchMock.get('https://www.reddit.com/r/reactjs.json', mockData)
+// fetchMock.get('https://www.reddit.com/r/reactjs.json', 500)
 
 
 
@@ -46,11 +48,9 @@ const serializedPosts = (json:TsubredditInJson):TserializedPosts => ({
   receivedAt: Date.now()
 })
 
-
-fetchMock.get('https://www.reddit.com/r/reactjs.json', mockData)
-// fetchMock.get('https://www.reddit.com/r/reactjs.json', 500)
 const getPosts = async():Promise<TserializedPosts> => {
   const response = await fetch('https://www.reddit.com/r/reactjs.json')
+  await new Promise<void>((rs)=>{setTimeout(rs, 3000)})
   if (!response.ok) {
     throw new Error('HTTP error, status = ' + response.status)
   }

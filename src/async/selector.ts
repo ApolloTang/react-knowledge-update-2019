@@ -9,15 +9,30 @@ import { Tstore } from './store'
 
 
 interface TmapStoreToProps {
-  subreddit: Tstore['subreddit']
+  // subreddit: Tstore['subreddit']
+  date: string
+  posts: Tstore['subreddit']['posts']
+  isLoading: Tstore['subreddit']['isLoading']
+  errorMsg: Tstore['subreddit']['errorMsg']
 }
 
 interface TmapDispatchToProps {
   dispatch_fetchSubredditPosts: () => void
 }
 
+
+
 const mapStoreToProps = (store:Tstore) => {
-  return {subreddit: store.subreddit}
+  const receivedAt = store && store.subreddit && store.subreddit.receivedAt
+  const date = receivedAt && (new Date(receivedAt)).toISOString()
+
+  return {
+    // subreddit: store && store.subreddit,
+    date,
+    posts: store && store.subreddit && store.subreddit.posts,
+    isLoading: store && store.subreddit && store.subreddit.isLoading,
+    errorMsg: store && store.subreddit && store.subreddit.errorMsg
+  }
 }
 
 const mapDispatchToProps = (dispatch:ThunkDispatch<Tstore, {}, Tactions>) => {

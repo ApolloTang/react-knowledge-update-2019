@@ -11,12 +11,28 @@ import {
 
 
 interface TAppProps {
-  subreddit:TmapStoreToProps['subreddit']
+  // subreddit:TmapStoreToProps['subreddit']
+  date:TmapStoreToProps['date']
+  posts:TmapStoreToProps['posts']
+  isLoading:TmapStoreToProps['isLoading']
+  errorMsg:TmapStoreToProps['errorMsg']
   dispatch_fetchSubredditPosts:TmapDispatchToProps['dispatch_fetchSubredditPosts']
 }
 
+type TPost = any // @TODO fixtype
+
+const Post = ({post}:TPost) => {
+  return(
+    <div>{JSON.stringify(post, null, 2)}</div>
+  )
+}
+
 const App = ({
-  subreddit,
+  // subreddit,
+  date,
+  posts,
+  isLoading,
+  errorMsg,
   dispatch_fetchSubredditPosts,
 }:TAppProps) => {
   const handle_refresh = () => {
@@ -34,17 +50,22 @@ const App = ({
     }
   } , [/* onMount and onUnmount] */])
 
-  const date = 'sept 20, 2019'
-  return(
-    <div>
-      <h1>fetching list of posts from https://www.reddit.com/r/reactjs/</h1>
-      <div>last updated at: {date} <button onClick={handle_refresh}>refresh</button></div>
-      <div>Post goes here</div>
-      <pre><code>
-        {JSON.stringify(subreddit, null, 2)}
-      </code></pre>
-    </div>
-  )
+    return(
+      <div>
+        <div>fetching list of posts from https://www.reddit.com/r/reactjs/</div>
+        <div>last updated at: {date} <button onClick={handle_refresh}>refresh</button></div>
+        {
+          isLoading
+            ? <div> ... Loading</div>
+            : posts && posts.map(post=><Post key={post.id} post={post} />)
+        }
+        { errorMsg ? <div>{errorMsg}</div> : null}
+        {/* <pre><code> */}
+        {/*   {JSON.stringify(subreddit, null, 2)} */}
+        {/* </code></pre> */}
+      </div>
+    )
+
 }
 
 
