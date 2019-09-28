@@ -3,19 +3,22 @@ import React, {
 } from 'react'
 import {connect} from 'react-redux'
 import {
+  TmapDispatchToProps,
+  TmapStoreToProps,
   mapStoreToProps,
   mapDispatchToProps
 } from './selector'
 
 
+interface TAppProps {
+  subreddit:TmapStoreToProps['subreddit']
+  dispatch_fetchSubredditPosts:TmapDispatchToProps['dispatch_fetchSubredditPosts']
+}
 
 const App = ({
   subreddit,
   dispatch_fetchSubredditPosts,
-}:{
-  subreddit: any // @TODO fixme
-  dispatch_fetchSubredditPosts:any //@TODO fixme
-}) => {
+}:TAppProps) => {
   const handle_refresh = () => {
     dispatch_fetchSubredditPosts()
   }

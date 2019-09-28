@@ -5,18 +5,20 @@ import {
   Tactions,
 } from './action'
 
-import {Store} from './store'
+import { Store } from './store'
+
+
+interface TmapStoreToProps {
+  subreddit: Store['subreddit']
+}
+
+interface TmapDispatchToProps {
+  dispatch_fetchSubredditPosts: () => void
+}
 
 const mapStoreToProps = (store:Store) => {
   return {subreddit: store.subreddit}
 }
-
-interface TDispatch {
-  addTodo: (text:string) => void
-  deleteTodo: (id:string) => void
-  toggleTodo: (id:string) => void
-}
-
 
 const mapDispatchToProps = (dispatch:ThunkDispatch<Store, {}, Tactions>) => {
   const dispatch_fetchSubredditPosts = () => {
@@ -29,7 +31,8 @@ const mapDispatchToProps = (dispatch:ThunkDispatch<Store, {}, Tactions>) => {
 }
 
 export {
-  TDispatch,
+  TmapDispatchToProps,
+  TmapStoreToProps,
   mapStoreToProps,
   mapDispatchToProps
 }
