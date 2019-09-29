@@ -4,21 +4,23 @@ import {
 } from './action'
 
 import {
-  TpostData,
-} from './api'
+  Tposts
+} from './model'
+
 
 interface Treducer {
-  posts: undefined|TpostData[]
+  posts     : undefined|Tposts
   receivedAt: undefined|number
-  isLoading: boolean
-  errorMsg: undefined|string
+  isLoading : boolean
+  errorMsg  : undefined|string
 }
 const initialState:Treducer = {
-  posts: undefined,
+  posts     : undefined,
   receivedAt: undefined,
-  isLoading: false,
-  errorMsg: undefined
+  isLoading : false,
+  errorMsg  : undefined
 }
+
 
 function reducer(
   state:Treducer = initialState,
@@ -35,8 +37,9 @@ function reducer(
     }
     case TactionNames.fetchSubreddit_success: {
       type Tsuccess = typeof action
-      const posts = action && action.payload && action.payload.posts
-      const receivedAt = action && action.payload && action.payload.receivedAt
+      const payload = action && action.payload && action.payload
+      const posts = payload && payload.posts
+      const receivedAt = payload && payload.receivedAt
       return {
         ...state,
         posts,
