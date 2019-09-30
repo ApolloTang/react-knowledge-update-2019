@@ -9,19 +9,17 @@ import {
   mapDispatchToProps
 } from './selector'
 
+import {
+  Tpost
+} from './model'
 
-interface TAppProps {
-  // subreddit:TmapStoreToProps['subreddit']
-  date:TmapStoreToProps['date']
-  posts:TmapStoreToProps['posts']
-  isLoading:TmapStoreToProps['isLoading']
-  errorMsg:TmapStoreToProps['errorMsg']
-  dispatch_fetchSubredditPosts:TmapDispatchToProps['dispatch_fetchSubredditPosts']
+type TAppProps = TmapStoreToProps & TmapDispatchToProps
+
+type TPostProps = {
+  post:Tpost
 }
 
-type TPost = any // @TODO fixtype
-
-const Post = ({post}:TPost) => {
+const Post = ({post}:TPostProps) => {
   return(
     <div>{JSON.stringify(post, null, 2)}</div>
   )
