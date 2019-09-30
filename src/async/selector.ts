@@ -8,21 +8,7 @@ import {
 import { Tstore } from './store'
 
 
-interface TmapStoreToProps {
-  // subreddit: Tstore['subreddit']
-  date: string | undefined
-  posts: Tstore['subreddit']['posts']
-  isLoading: Tstore['subreddit']['isLoading']
-  errorMsg: Tstore['subreddit']['errorMsg']
-}
-
-interface TmapDispatchToProps {
-  dispatch_fetchSubredditPosts: () => void
-}
-
-
-
-const mapStoreToProps = (store:Tstore):TmapStoreToProps => {
+const mapStoreToProps = (store:Tstore) => {
   const receivedAt = store && store.subreddit && store.subreddit.receivedAt
   const date = receivedAt ? (new Date(receivedAt)).toISOString() : undefined
 
@@ -35,6 +21,7 @@ const mapStoreToProps = (store:Tstore):TmapStoreToProps => {
   }
 }
 
+
 const mapDispatchToProps = (dispatch:ThunkDispatch<Tstore, {}, Tactions>) => {
   const dispatch_fetchSubredditPosts = () => {
     dispatch(actions.thunk_fetchSubreddit())
@@ -44,6 +31,9 @@ const mapDispatchToProps = (dispatch:ThunkDispatch<Tstore, {}, Tactions>) => {
     dispatch_fetchSubredditPosts,
   }
 }
+
+type TmapStoreToProps = ReturnType<typeof mapStoreToProps>
+type TmapDispatchToProps = ReturnType<typeof mapDispatchToProps>
 
 export {
   TmapDispatchToProps,
