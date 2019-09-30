@@ -21,7 +21,9 @@ type TPostProps = {
 
 const Post = ({post}:TPostProps) => {
   return(
-    <div>{JSON.stringify(post, null, 2)}</div>
+    <div>
+      {post.author} : {post.title}
+    </div>
   )
 }
 

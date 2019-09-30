@@ -13,12 +13,12 @@ const mockApi = { // Tsubreddit_api
     children: [   // Tposts_api
       {           // Tpost_api
         data: {   // TpostData_api
-          author: 'author', title: 'title', id: '1'
+          author: 'author1', title: 'title1', id: '1'
         }
       },
       {           // Tpost_api
         data: {   // TpostData_api
-          author: 'author', title: 'title', id: '1'
+          author: 'author2', title: 'title2', id: '2'
         }
       },
     ]
@@ -40,7 +40,7 @@ type TpostData_api = Tpost_api['data']
 // reducer schema
 // ==============
 type Tpost= TpostData_api
-type Tposts = Tpost[]|[]
+type Tposts = Tpost[]
 interface Tsubreddit_serialized {
   posts:Tposts
   receivedAt: number
