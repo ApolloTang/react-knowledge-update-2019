@@ -9,15 +9,16 @@ import { Tstore } from './store'
 
 
 const mapStoreToProps = (store:Tstore) => {
-  const receivedAt = store && store.subreddit && store.subreddit.receivedAt
+  const subreddit = store && store.subreddit
+
+  const receivedAt = subreddit && subreddit.receivedAt
   const date = receivedAt ? (new Date(receivedAt)).toISOString() : undefined
 
   return {
-    // subreddit: store && store.subreddit,
     date,
-    posts: store && store.subreddit && store.subreddit.posts,
-    isLoading: store && store.subreddit && store.subreddit.isLoading,
-    errorMsg: store && store.subreddit && store.subreddit.errorMsg
+    posts: subreddit && subreddit.posts,
+    isLoading: subreddit && subreddit.isLoading,
+    errorMsg: subreddit && subreddit.errorMsg
   }
 }
 
