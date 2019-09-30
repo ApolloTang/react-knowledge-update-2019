@@ -36,6 +36,18 @@ jest.mock('../api', ()=>(
 ))
 
 
+function renderWithStore(
+  ui:React.ReactNode
+) {
+  const store = createStore(rootReducer, applyMiddleware(thunk))
+  return render(
+    <Provider store={store}>
+      {ui}
+    </Provider>
+  )
+}
+
+
 describe('async', () => {
   it('Mock api works: ', async () => {
     const payload_subreaddit = await api.subReddit.getPosts()
@@ -44,15 +56,10 @@ describe('async', () => {
 
 
   it('Should shows subreddit post without loading: ', async () => {
-    const store = createStore( rootReducer, applyMiddleware( thunk))
     const {
       getByText,
       queryByText
-    } = render(
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    )
+    } = renderWithStore(<App/>)
     await wait(
       () => {
         getByText(new RegExp(author1, 'i'))
@@ -66,15 +73,10 @@ describe('async', () => {
 
 
   it('Should shows loading without subreddit: ', async () => {
-    const store = createStore( rootReducer, applyMiddleware( thunk))
     const {
       getByText,
       queryByText
-    } = render(
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    )
+    } = renderWithStore(<App/>)
     await wait(
       () => {
         getByText(/loading/i)
