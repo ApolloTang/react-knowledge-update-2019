@@ -51,12 +51,12 @@ const App = ({
     return(
       <div>
         <div>fetching list of posts from https://www.reddit.com/r/reactjs/</div>
-        <div>last updated at: {date} <button onClick={handle_refresh} disabled={isLoading} >refresh</button></div>
-        {
-          isLoading
-            ? <div> ... Loading</div>
-            : posts && posts.map(post=><Post key={post.id} post={post} />)
-        }
+        <div>
+          <button onClick={handle_refresh} disabled={isLoading} >refresh</button>
+          <span>{ isLoading ? '... Loading':''}</span>
+        </div>
+        <div>{date?`last updated at: ${date}`:null}</div>
+        { posts && posts.map(post=><Post key={post.id} post={post} />) }
         { errorMsg ? <div>{errorMsg}</div> : null}
         {/* <pre><code> */}
         {/*   {JSON.stringify(subreddit, null, 2)} */}
@@ -65,7 +65,6 @@ const App = ({
     )
 
 }
-
 
 
 export default connect(mapStoreToProps, mapDispatchToProps)(App)

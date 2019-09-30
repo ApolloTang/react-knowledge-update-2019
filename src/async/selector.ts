@@ -10,7 +10,7 @@ import { Tstore } from './store'
 
 interface TmapStoreToProps {
   // subreddit: Tstore['subreddit']
-  date: string
+  date: string | undefined
   posts: Tstore['subreddit']['posts']
   isLoading: Tstore['subreddit']['isLoading']
   errorMsg: Tstore['subreddit']['errorMsg']
@@ -22,9 +22,9 @@ interface TmapDispatchToProps {
 
 
 
-const mapStoreToProps = (store:Tstore) => {
+const mapStoreToProps = (store:Tstore):TmapStoreToProps => {
   const receivedAt = store && store.subreddit && store.subreddit.receivedAt
-  const date = receivedAt && (new Date(receivedAt)).toISOString()
+  const date = receivedAt ? (new Date(receivedAt)).toISOString() : undefined
 
   return {
     // subreddit: store && store.subreddit,
