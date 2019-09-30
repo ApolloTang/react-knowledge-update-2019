@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   render,
-  wait
+  wait,
+  fireEvent
 } from '@testing-library/react'
 import {
   createStore,
@@ -113,6 +114,23 @@ describe('async', () => {
         expect(queryByText(/loading/i)).toBeNull()
         const refreshButton = getByText(/refresh/i)
         expect(refreshButton).toBeEnabled()
+      }
+    )
+  })
+
+
+  it('Click refresh button will disable refresh button itself and show loading', async () => {
+    const {
+      getByText,
+      queryByText
+    } = renderWithStore(<App/>)
+    await wait(
+      () => {
+        expect(queryByText(/loading/i)).toBeNull()
+        const refreshButton = getByText(/refresh/i)
+        fireEvent.click(refreshButton)
+        expect(refreshButton).toBeDisabled()
+        queryByText(/loading/i)
       }
     )
   })
