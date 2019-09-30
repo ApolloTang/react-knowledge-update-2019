@@ -55,7 +55,7 @@ describe('async', () => {
   })
 
 
-  it('Should shows subreddit post without loading: ', async () => {
+  it('Should shows subreddit post without loading', async () => {
     const {
       getByText,
       queryByText
@@ -72,7 +72,7 @@ describe('async', () => {
   })
 
 
-  it('Should shows loading without subreddit: ', async () => {
+  it('Should shows loading without subreddit', async () => {
     const {
       getByText,
       queryByText
@@ -88,4 +88,32 @@ describe('async', () => {
     )
   })
 
+
+  it('Refresh button should be disable during loading', async () => {
+    const {
+      getByText,
+    } = renderWithStore(<App/>)
+    await wait(
+      () => {
+        getByText(/loading/i)
+        const refreshButton = getByText(/refresh/i)
+        expect(refreshButton).toBeDisabled()
+      }
+    )
+  })
+
+
+  it('Refresh button should be enable after loading', async () => {
+    const {
+      getByText,
+      queryByText
+    } = renderWithStore(<App/>)
+    await wait(
+      () => {
+        expect(queryByText(/loading/i)).toBeNull()
+        const refreshButton = getByText(/refresh/i)
+        expect(refreshButton).toBeEnabled()
+      }
+    )
+  })
 })
