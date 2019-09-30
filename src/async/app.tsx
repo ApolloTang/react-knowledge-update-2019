@@ -56,7 +56,7 @@ const App = ({
           <span>{ isLoading ? '... Loading':''}</span>
         </div>
         <div>{date?`last updated at: ${date}`:null}</div>
-        { posts && posts.map(post=><Post key={post.id} post={post} />) }
+        { Array.isArray(posts) ? (posts as Tpost[]).map((post)=><Post key={post.id} post={post} />) : null }
         { errorMsg ? <div>{errorMsg}</div> : null}
         {/* <pre><code> */}
         {/*   {JSON.stringify(subreddit, null, 2)} */}
