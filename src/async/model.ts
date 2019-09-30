@@ -25,6 +25,18 @@ const mockApi = { // Tsubreddit_api
   }
 }
 
+const exampleData_subrediddit_serialized = {
+  posts: [
+      {
+        author: 'author1', title: 'title1', id: '1'
+      },
+      {
+        author: 'author2', title: 'title2', id: '2'
+      }
+  ],
+  receivedAt: 1569818341066
+}
+
 
 // ==========
 // Api schema
@@ -86,6 +98,8 @@ const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
 
 
 export {
+  exampleData_subrediddit_serialized,
+
   mockApi,
   Tsubreddit_api,
   TsubredditData_api,

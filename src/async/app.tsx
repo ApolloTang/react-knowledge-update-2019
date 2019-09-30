@@ -28,7 +28,6 @@ const Post = ({post}:TPostProps) => {
 }
 
 const App = ({
-  // subreddit,
   date,
   posts,
   isLoading,
