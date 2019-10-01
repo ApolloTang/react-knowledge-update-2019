@@ -59,7 +59,11 @@ const App = ({
           ? (<div><span>last updated at: </span><span data-testid="last-update">{date}</span></div>)
           : null
         }
-        { Array.isArray(posts) ? (posts as Tpost[]).map((post)=><Post key={post.id} post={post} />) : null }
+        <div>
+        {
+          Array.isArray(posts) ? (posts as Tpost[]).map((post)=><Post key={post.id} post={post} />) : null
+        }
+        </div>
         { errorMsg ? <div>{errorMsg}</div> : null}
       </div>
     )
