@@ -64,7 +64,7 @@ const App = ({
           Array.isArray(posts) ? (posts as Tpost[]).map((post)=><Post key={post.id} post={post} />) : null
         }
         </div>
-        { errorMsg ? <div>{errorMsg}</div> : null}
+        { errorMsg ? <div data-testid="error-msg">{errorMsg}</div> : null}
       </div>
     )
 
