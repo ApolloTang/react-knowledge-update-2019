@@ -1,6 +1,6 @@
 import fetchMock from 'fetch-mock'
 import {
-  mockApi,
+  example_apiSubreddit,
   apiSerializer_subreddit,
   Tsubreddit_serialized
 } from './model'
@@ -8,7 +8,7 @@ import {
 
 // ==========
 // Uncomment out one of next 2 lines to simulate mock fetching:
-  fetchMock.get('https://www.reddit.com/r/reactjs.json', mockApi)
+  // fetchMock.get('https://www.reddit.com/r/reactjs.json', example_apiSubreddit)
   // fetchMock.get('https://www.reddit.com/r/reactjs.json', 500)
 // ==========
 

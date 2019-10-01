@@ -5,19 +5,19 @@
 // that is consumable by reducer.
 
 
-// =========================
-// Example of Api data shape
-// =========================
-const mockApi = { // Tsubreddit_api
-  data: {         // TsubredditData_api
-    children: [   // Tposts_api
-      {           // Tpost_api
-        data: {   // TpostData_api
+// ========================================
+// Example of subreddit data shape from API
+// ========================================
+const example_apiSubreddit = { // Tsubreddit_api
+  data: {                      // TsubredditData_api
+    children: [                // Tposts_api
+      {                        // Tpost_api
+        data: {                // TpostData_api
           author: 'author1', title: 'title1', id: '1'
         }
       },
-      {           // Tpost_api
-        data: {   // TpostData_api
+      {
+        data: {
           author: 'author2', title: 'title2', id: '2'
         }
       },
@@ -25,7 +25,10 @@ const mockApi = { // Tsubreddit_api
   }
 }
 
-const exampleData_subrediddit_serialized = {
+// ==========================================
+// Example of subreddit data shape in reducer
+// ==========================================
+const exampleData_reducerSubrediddit = {
   posts: [
       {
         author: 'author1', title: 'title1', id: '1'
@@ -41,7 +44,7 @@ const exampleData_subrediddit_serialized = {
 // ==========
 // Api schema
 // ==========
-type Tsubreddit_api = typeof mockApi
+type Tsubreddit_api = typeof example_apiSubreddit
 type TsubredditData_api = Tsubreddit_api['data']
 type Tposts_api = TsubredditData_api['children']
 type Tpost_api = Tposts_api[0]
@@ -51,8 +54,11 @@ type TpostData_api = Tpost_api['data']
 // ==============
 // reducer schema
 // ==============
-type Tpost= TpostData_api
-type Tposts = Tpost[]
+type Tsubreddit_reducer = typeof exampleData_reducerSubrediddit
+type Tposts = Tsubreddit_reducer['posts']
+type Tpost= Tposts[0]
+
+
 interface Tsubreddit_serialized {
   posts:Tposts
   receivedAt: number
@@ -98,9 +104,8 @@ const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
 
 
 export {
-  exampleData_subrediddit_serialized,
+  example_apiSubreddit,
 
-  mockApi,
   Tsubreddit_api,
   TsubredditData_api,
   Tposts_api,
