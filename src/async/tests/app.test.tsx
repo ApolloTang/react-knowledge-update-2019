@@ -16,26 +16,64 @@ import App from '../app'
 import {rootReducer} from '../store'
 
 import {
-  exampleData_subrediddit_serialized as mockData_serialized
+  Tposts,
 } from  '../model'
-const author1 = mockData_serialized.posts[0].author
-const title1 = mockData_serialized.posts[0].title
-const author2 = mockData_serialized.posts[1].author
-const title2 = mockData_serialized.posts[1].title
+
+
+
+const mockPosts1 = [
+  { author: 'author1', title: 'title1', id: '1' },
+  { author: 'author2', title: 'title2', id: '2' }
+]
+const mockPosts2 = [
+  { author: 'author2', title: 'title2', id: '3' },
+  { author: 'author3', title: 'title3', id: '4' }
+]
+const  mockSerizedDataGenerator = (timeStamp:number, fakePost:Tposts) => {
+  return {
+    posts: fakePost,
+    receivedAt: timeStamp
+  }
+}
+
 
 import api from '../api'
+// jest.mock('../api', ()=>(
+//   {
+//     subReddit: {
+//       getPosts: jest.fn()
+//         .mockImplementationOnce( async()=>{
+//           await new Promise<void>((rs)=>{ setTimeout(rs, 1000) })
+//           return mockSerizedDataGenerator(Date.now(), mockPosts1 )
+//         })
+//         .mockImplementationOnce( async()=>{
+//           await new Promise<void>((rs)=>{ setTimeout(rs, 1000) })
+//           return mockSerizedDataGenerator(Date.now(), mockPosts2)
+//         })
+//     }
+//   }
+// ))
+
+
 jest.mock('../api', ()=>(
   {
     subReddit: {
-      getPosts: jest.fn( async()=>{
-        const data_serialized = mockData_serialized
-        await new Promise<void>((rs)=>{ setTimeout(rs, 1000) })
-        return data_serialized
-      })
+      getPosts: () => {}
+        // jest.fn()
+        // .mockImplementationOnce( async()=>{
+        //   await new Promise<void>((rs)=>{ setTimeout(rs, 1000) })
+        //   return mockSerizedDataGenerator(Date.now(), mockPosts1 )
+        // })
+        // .mockImplementationOnce( async()=>{
+        //   await new Promise<void>((rs)=>{ setTimeout(rs, 1000) })
+        //   return mockSerizedDataGenerator(Date.now(), mockPosts2)
+        // })
     }
   }
 ))
 
+const apiSubReddit = api.subReddit
+let spy
 
 function renderWithStore(
   ui:React.ReactNode
@@ -50,9 +88,31 @@ function renderWithStore(
 
 
 describe('async', () => {
+
+  beforeEach(()=>{
+    spy = jest.spyOn(apiSubReddit, 'getPosts')
+      .mockImplementationOnce( async()=>{
+        await new Promise<void>((rs)=>{ setTimeout(rs, 100) })
+        return mockSerizedDataGenerator(Date.now(), mockPosts1 )
+      })
+      .mockImplementationOnce( async()=>{
+        await new Promise<void>((rs)=>{ setTimeout(rs, 100) })
+        return mockSerizedDataGenerator(Date.now(), mockPosts2)
+      })
+  })
+
+  afterEach(()=>{
+    spy.mockReset()
+  })
+
   it('Mock api works: ', async () => {
-    const payload_subreaddit = await api.subReddit.getPosts()
-    expect(payload_subreaddit).toBe(mockData_serialized)
+    const payload_subreaddit1 = await api.subReddit.getPosts()
+    const payload_subreaddit2 = await api.subReddit.getPosts()
+    const t1 = payload_subreaddit1.receivedAt
+    const t2 = payload_subreaddit2.receivedAt
+    expect(t1).not.toBe(t2)
+    expect(payload_subreaddit1.posts).toEqual(mockPosts1)
+    expect(payload_subreaddit2.posts).toEqual(mockPosts2)
   })
 
 
@@ -63,10 +123,12 @@ describe('async', () => {
     } = renderWithStore(<App/>)
     await wait(
       () => {
-        getByText(new RegExp(author1, 'i'))
-        getByText(new RegExp(title1, 'i'))
-        getByText(new RegExp(author2, 'i'))
-        getByText(new RegExp(title2, 'i'))
+        getByText(new RegExp(mockPosts1[0].author, 'i'))
+        getByText(new RegExp(mockPosts1[0].title, 'i'))
+
+        getByText(new RegExp(mockPosts1[1].author, 'i'))
+        getByText(new RegExp(mockPosts1[1].title, 'i'))
+
         expect(queryByText(/loading/i)).toBe(null)
       }
     )
@@ -81,10 +143,11 @@ describe('async', () => {
     await wait(
       () => {
         getByText(/loading/i)
-        expect(queryByText(new RegExp(author1, 'i'))).toBe(null)
-        expect(queryByText(new RegExp(title1, 'i'))).toBe(null)
-        expect(queryByText(new RegExp(author2, 'i'))).toBe(null)
-        expect(queryByText(new RegExp(title2, 'i'))).toBe(null)
+        expect( queryByText(new RegExp(mockPosts1[0].author, 'i')) ).toBe(null)
+        expect( queryByText(new RegExp(mockPosts1[0].title, 'i')) ).toBe(null)
+
+        expect( queryByText(new RegExp(mockPosts1[1].author, 'i')) ).toBe(null)
+        expect( queryByText(new RegExp(mockPosts1[1].title, 'i')) ).toBe(null)
       }
     )
   })
@@ -131,6 +194,30 @@ describe('async', () => {
         fireEvent.click(refreshButton)
         expect(refreshButton).toBeDisabled()
         queryByText(/loading/i)
+      }
+    )
+  })
+
+
+  it('time stamp will be different after refresh', async () => {
+    const {
+      getByText,
+      getByTestId,
+    } = renderWithStore(<App/>)
+    await wait(
+      async () => {
+        const lastUpdate_beforeRefresh = getByTestId('last-update')
+        const date_beforeRefresh = lastUpdate_beforeRefresh.innerHTML
+
+        const refreshButton = getByText(/refresh/i)
+        fireEvent.click(refreshButton)
+
+        await new Promise<void>((rs)=>setTimeout(rs, 500))
+
+        const lastUpdate_afterRefresh = getByTestId('last-update')
+        const date_afterRefresh = lastUpdate_afterRefresh.innerHTML
+
+        expect(date_beforeRefresh).not.toBe(date_afterRefresh)
       }
     )
   })

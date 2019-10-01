@@ -39,13 +39,11 @@ const App = ({
   }
 
   useEffect(()=>{
-    console.log('mounting')
     const busy = false
     if (!busy) {
       dispatch_fetchSubredditPosts()
     }
     return () => {
-      console.log('un mounting')
     }
   } , [/* onMount and onUnmount] */])
 
@@ -56,7 +54,11 @@ const App = ({
           <button onClick={handle_refresh} disabled={isLoading} >refresh</button>
           <span>{ isLoading ? '... Loading':''}</span>
         </div>
-        <div>{date?`last updated at: ${date}`:null}</div>
+        {
+          date
+          ? (<div><span>last updated at: </span><span data-testid="last-update">{date}</span></div>)
+          : null
+        }
         { Array.isArray(posts) ? (posts as Tpost[]).map((post)=><Post key={post.id} post={post} />) : null }
         { errorMsg ? <div>{errorMsg}</div> : null}
       </div>
