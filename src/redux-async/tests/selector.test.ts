@@ -1,0 +1,77 @@
+import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import {applyMiddleware, compose} from 'redux'
+
+import {
+  mapStoreToProps,
+  mapDispatchToProps
+} from  '../selector'
+
+// import {Tstore} from '../store'
+
+// import {ACrtors_Todos} from '../action'
+
+//
+// describe('Todo selector, mapStoreToProps', ()=>{
+//   const fakeStore = {
+//     todos: 'todos'
+//   } as unknown as Tstore
+//
+//   it('Should select todos from the store: ', () => {
+//     expect(mapStoreToProps(fakeStore)).toEqual(fakeStore)
+//   })
+// })
+
+
+describe('Todo selector, mapDispatchToProps', ()=>{
+  const middlewares = [thunk] // add your middlewares like `redux-thunk`
+  const mockCreateStore = configureStore(middlewares)
+  const mockRootReducer = {}
+  const initialState = mockRootReducer
+  const store = mockCreateStore(initialState)
+  const dispatch = store.dispatch
+
+  const {
+    dispatch_fetchSubredditPosts
+  } = mapDispatchToProps(dispatch)
+
+  it('fetch', ()=>{
+
+  })
+  // it('Can dispatch ACrtors_Todos.Acrtor_add ', () => {
+  //   const spy = jest.spyOn(ACrtors_Todos, 'ACrtor_add')
+  //
+  //   const todoText = 'learn react'
+  //   const dateBefore = Date.now()
+  //   dispatch_addTodo(todoText)
+  //   const dateAfter = Date.now()
+  //
+  //   const called_newId = +spy.mock.calls[0][0]
+  //   expect(called_newId).toBeGreaterThanOrEqual(dateBefore)
+  //   expect(called_newId).toBeLessThanOrEqual(dateAfter)
+  //
+  //   const called_text = spy.mock.calls[0][1]
+  //   expect(called_text).toBe(todoText)
+  //
+  //   spy.mockRestore()
+  // })
+  //
+  // it('Can dispatch ACrtors_Todos.ACrtor_delete ', () => {
+  //   const spy = jest.spyOn(ACrtors_Todos, 'ACrtor_delete')
+  //   const someId = 'someId'
+  //   dispatch_deleteTodo(someId)
+  //   const called_deleteId = spy.mock.calls[0][0]
+  //   expect(called_deleteId).toBe(someId)
+  //   spy.mockRestore()
+  // })
+  //
+  // it('Can dispatch ACrtors_Todos.ACrtor_toggle ', () => {
+  //   const spy = jest.spyOn(ACrtors_Todos, 'ACrtor_toggle')
+  //   const someId = 'someId'
+  //   dispatch_toggleTodo(someId)
+  //   const called_deleteId = spy.mock.calls[0][0]
+  //   expect(called_deleteId).toBe(someId)
+  //   spy.mockRestore()
+  // })
+})
+
