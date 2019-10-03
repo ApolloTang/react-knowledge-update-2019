@@ -7,7 +7,7 @@ import {ThunkDispatch} from 'redux-thunk'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import { TactionNames, actions } from '../action'
+import { actionNames, actions } from '../action'
 
 
 describe('[Selector, mapDispatchToProps]', ()=>{
@@ -38,8 +38,8 @@ describe('[Selector, mapDispatchToProps]', ()=>{
     //   { type: 'fetchSubreddit_success',
     //     payload: { posts: [Array], receivedAt: 1570074061361 } } ]
 
-    expect(dipatchedActions[0].type).toBe(TactionNames.fetchSubreddit_start)
-    expect(dipatchedActions[1].type).toBe(TactionNames.fetchSubreddit_success)
+    expect(dipatchedActions[0].type).toBe(actionNames.fetchSubreddit_start)
+    expect(dipatchedActions[1].type).toBe(actionNames.fetchSubreddit_success)
   })
 
   it('thunk_fetchSubreddit should dispatch start and fail', async()=>{
@@ -52,8 +52,8 @@ describe('[Selector, mapDispatchToProps]', ()=>{
     //   { type: 'fetchSubreddit_fail',
     //     error: 'Error: HTTP error, status = 500' } ]
 
-    expect(dipatchedActions[0].type).toBe(TactionNames.fetchSubreddit_start)
-    expect(dipatchedActions[1].type).toBe(TactionNames.fetchSubreddit_fail)
+    expect(dipatchedActions[0].type).toBe(actionNames.fetchSubreddit_start)
+    expect(dipatchedActions[1].type).toBe(actionNames.fetchSubreddit_fail)
   })
 })
 

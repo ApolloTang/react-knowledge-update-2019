@@ -9,7 +9,7 @@ type Tpayload_subreddit = Tsubreddit_serialized | undefined
 type Tpayload_subreddit_error = string | undefined
 
 
-enum TactionNames {
+enum actionNames {
   fetchSubreddit_start = 'fetchSubreddit_start',
   fetchSubreddit_success = 'fetchSubreddit_success',
   fetchSubreddit_fail = 'fetchSubreddit_fail',
@@ -17,14 +17,14 @@ enum TactionNames {
 
 
 const action_fetchSubreddit_start = () => ({
-  type: TactionNames.fetchSubreddit_start as TactionNames.fetchSubreddit_start
+  type: actionNames.fetchSubreddit_start as actionNames.fetchSubreddit_start
 })
 const action_fetchSubreddit_success = (payload_subreaddit:Tpayload_subreddit) => ({
-  type: TactionNames.fetchSubreddit_success as TactionNames.fetchSubreddit_success,
+  type: actionNames.fetchSubreddit_success as actionNames.fetchSubreddit_success,
   payload: payload_subreaddit
 })
 const action_fetchSubreddit_fail = (payload_subreddit_error:Tpayload_subreddit_error) => ({
-  type: TactionNames.fetchSubreddit_fail as TactionNames.fetchSubreddit_fail,
+  type: actionNames.fetchSubreddit_fail as actionNames.fetchSubreddit_fail,
   error: payload_subreddit_error
 })
 
@@ -67,7 +67,7 @@ type Tactions = Tactions_fetchSubreddit
   // | thunk_postSubreddit  // <-- combine all types of action or thunk
 
 export {
-  TactionNames,
+  actionNames,
   Tactions,
   actions,
 }

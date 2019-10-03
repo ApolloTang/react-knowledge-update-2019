@@ -1,5 +1,5 @@
 import {
-  TactionNames,
+  actionNames,
   Tactions
 } from './action'
 
@@ -27,7 +27,7 @@ function reducer(
   action:Tactions
 ):Treducer {
   switch (action.type) {
-    case TactionNames.fetchSubreddit_start: {
+    case actionNames.fetchSubreddit_start: {
       type Tstart = typeof action
       return {
         ...state,
@@ -35,7 +35,7 @@ function reducer(
         errorMsg: undefined
       }
     }
-    case TactionNames.fetchSubreddit_success: {
+    case actionNames.fetchSubreddit_success: {
       type Tsuccess = typeof action
       const payload = action && action.payload && action.payload
       const posts = payload && payload.posts
@@ -48,7 +48,7 @@ function reducer(
         errorMsg: undefined
       }
     }
-    case TactionNames.fetchSubreddit_fail: {
+    case actionNames.fetchSubreddit_fail: {
       type Tfail = typeof action
       const error = action && action.error
       return {
