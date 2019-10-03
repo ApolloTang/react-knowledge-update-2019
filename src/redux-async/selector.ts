@@ -12,12 +12,10 @@ import { Tstore } from './store'
 function getIsoStringFromDatestamp<T extends number|undefined>(
   receivedAt:T
 ): T extends number ? string : undefined {
-  // @ts-ignore [1]
   return (typeof receivedAt === 'number')
-    ? (new Date(receivedAt)).toISOString() : undefined
+    ? (new Date(receivedAt)).toISOString() : undefined as any // [1]
 }
-// [1] Type 'string | undefined' is not assignable to type 'T extends number ? string : undefined'
-//     https://stackoverflow.com/questions/58213113/typescript-conditional-type-does-not-work
+// [1] https://stackoverflow.com/questions/58213113/typescript-conditional-type-does-not-work
 
 
 const mapStoreToProps = (store:Tstore) => {
