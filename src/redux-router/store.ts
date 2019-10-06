@@ -7,28 +7,23 @@ import thunk from 'redux-thunk'
 const history = createBrowserHistory()
 
 
-
-//Reducer
+// Reducer
 const createRootReducer = (history:History) => combineReducers( {
   router: connectRouter(history),
   foo: (s={})=>s
 })
 
 
-const configureStore = () => {
-
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-  const store = createStore(
-    createRootReducer(history),
-    undefined, /* preloaded state, */
-    composeEnhancers(
-      applyMiddleware(routerMiddleware(history), thunk)
-    )
-  )
-  return store
-}
 // Store
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(
+  createRootReducer(history),
+  undefined, /* preloaded state, */
+  composeEnhancers(
+    applyMiddleware(routerMiddleware(history), thunk)
+  )
+)
 
 
-export default configureStore
+export default store
 export {history}

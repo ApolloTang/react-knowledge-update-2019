@@ -15,11 +15,9 @@ declare global {
 }
 
 import {Provider} from 'react-redux'
-import configureStore, {history} from './store'
+import store, {history} from './store'
 
 import App from './App'
-
-const store = configureStore()
 
 
 // ===================================================
