@@ -6,7 +6,6 @@ import thunk from 'redux-thunk'
 
 const history = createBrowserHistory()
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
 //Reducer
@@ -15,15 +14,21 @@ const createRootReducer = (history:History) => combineReducers( {
   foo: (s={})=>s
 })
 
-// Store
-const store = createStore(
-  createRootReducer(history),
-  /* preloaded state, */
-  composeEnhancers(
-    applyMiddleware(routerMiddleware(history), thunk)
+
+const configureStore = () => {
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  const store = createStore(
+    createRootReducer(history),
+    undefined, /* preloaded state, */
+    composeEnhancers(
+      applyMiddleware(routerMiddleware(history), thunk)
+    )
   )
-)
+  return store
+}
+// Store
 
 
-export default store
+export default configureStore
 export {history}

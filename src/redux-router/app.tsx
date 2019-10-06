@@ -2,7 +2,7 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link, Switch
 }from 'react-router-dom'
 import {ConnectedRouter} from 'connected-react-router'
 import {History} from 'history'
@@ -21,8 +21,10 @@ const ConnectedRouterApp = ({history}:TConnectedRouterAppProps) => (
           <li><Link to="/a">Link to: /success</Link></li>
         </ul>
         <div>
-          <Route exact path="/"        component={()=>(<div>A</div>)} />
-          <Route exact path="/a" component={()=>(<div>B</div>)} />
+          <Switch>
+            <Route exact path="/"        component={()=>(<div>A</div>)} />
+            <Route exact path="/a" component={()=>(<div>B</div>)} />
+          </Switch>
         </div>
       </div>
     </Router>
