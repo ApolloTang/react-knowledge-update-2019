@@ -1,4 +1,4 @@
-const isTest = String(process.env.NODE_ENV) === 'test';
+const isTest = String(process.env.NODE_ENV) === 'test'
 const isProd = String(process.env.NODE_ENV) === 'production'
 
 module.exports = (api) => {
@@ -34,13 +34,13 @@ module.exports = (api) => {
         labelFormat: '[filename]--[local]',
       }
    ]
-  ];
+  ]
 
   const plugins = [
     '@babel/proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
     isTest ? 'babel-plugin-dynamic-import-node' : null
-  ].filter(Boolean);
+  ].filter(Boolean)
 
   return {
     presets,
