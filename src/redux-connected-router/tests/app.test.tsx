@@ -4,32 +4,49 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 
 import {routerMiddleware} from 'connected-react-router'
-import {history, createRootReducer} from '../store'
+import {history, RootReducer} from '../store'
 
-import { render, wait, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 
-import App from '../app'
-
-
+import {RouterApp} from '../app'
 
 
 
-describe('[Fetching Subreddit App]', () => {
+
+describe('[Connected Router]', () => {
   beforeEach(()=>{
   })
 
   afterEach(()=>{
   })
 
-  it('During initial loading there should be no subreddit', async () => {
-    const {
-      getByText,
-    } = renderWithStore(<App history={history}/>)
-    await wait(
-      () => {
-        getByText(/loading/i)
-      }
-    )
+  describe('Navigate to page a', () => {
+    it('Page A content appear', () => {
+      const {
+        getByText,
+      } = renderWithStore(<RouterApp/>)
+
+      const link = getByText('Link to: /page a')
+      fireEvent.click(link)
+
+      getByText('Page content a')
+    })
+
+    it('Connected Router Redux has path name /a', () => {
+      const {
+        getByText,
+        store
+      } = renderWithStore(<RouterApp/>)
+
+      const storeBeforeNavigate = store.getState()
+      expect(storeBeforeNavigate.router.location.pathname).toBe('/')
+
+      const link = getByText('Link to: /page a')
+      fireEvent.click(link)
+
+      const storeAfterNavigate = store.getState()
+      expect(storeAfterNavigate.router.location.pathname).toBe('/a')
+    })
   })
 })
 
@@ -37,15 +54,14 @@ describe('[Fetching Subreddit App]', () => {
 function renderWithStore(
   ui:React.ReactNode
 ) {
-
   const store = createStore(
-    createRootReducer(history),
+    RootReducer,
     applyMiddleware(routerMiddleware(history), thunk)
   )
-  // const store = createStore(rootReducer, applyMiddleware(thunk))
-  return render(
+  const rendered = render(
     <Provider store={store}>
       {ui}
     </Provider>
   )
+  return {...rendered, store}
 }

@@ -27,4 +27,7 @@ const store = createStore(
 )
 
 
-export {store, history}
+export {
+  store, history,
+  RootReducer
+}
