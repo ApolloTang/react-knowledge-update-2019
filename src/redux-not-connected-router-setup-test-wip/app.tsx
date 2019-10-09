@@ -33,15 +33,12 @@ const App = () => (
 
 
 // RouterApp
-import { history } from './store'
-import { ConnectedRouter } from 'connected-react-router'
-
+import {BrowserRouter as Router} from 'react-router-dom'
 const RouterApp = () => (
-  <ConnectedRouter history={history}>
-    <App />
-  </ConnectedRouter>
+  <Router>
+    <App/>
+  </Router>
 )
-
 
 export {App, RouterApp}
 
