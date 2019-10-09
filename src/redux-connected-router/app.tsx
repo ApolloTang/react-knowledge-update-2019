@@ -10,6 +10,9 @@ const ShowLocation = (
 ) => ( <div>Current pathname:{ location.pathname }</div> )
 const PathName = withRouter(ShowLocation) // <-- withRouter passes history.location to the wrapped component
 
+const Home = () => <div>home</div>
+const PageA = () => <div>Page content a</div>
+const PageNoMatch = () => <div>Page no match</div>
 
 // App
 import { Route, Link, Switch } from 'react-router-dom'
@@ -22,9 +25,9 @@ const App = () => (
     </ul>
     <div>
       <Switch>
-        <Route exact path="/"  component={()=><div>home</div>} />
-        <Route exact path="/a"><div>Page content a</div></Route>
-        <Route><div>No match</div></Route>
+        <Route exact path="/"  component={Home} />
+        <Route exact path="/a"><PageA /></Route>
+        <Route><PageNoMatch /></Route>
       </Switch>
     </div>
     <PathName/>
