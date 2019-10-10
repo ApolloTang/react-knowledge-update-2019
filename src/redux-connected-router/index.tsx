@@ -16,13 +16,17 @@ declare global {
 
 import { Provider } from 'react-redux'
 import { store } from './store'
-import { RouterApp } from './App'
+import { ConnectedRouter } from 'connected-react-router'
+import { App } from './app'
+import { history } from './store'
 
 
 // ===================================================
 ReactDOM.render(
   <Provider store={store}>
-    <RouterApp/>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('app')
 )

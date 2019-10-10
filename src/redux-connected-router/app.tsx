@@ -4,15 +4,20 @@ import React from 'react'
 // PathName
 import { Location }  from 'history'
 import { withRouter } from 'react-router-dom'
+
 interface TShowLocationProps { location: Location }
 const ShowLocation = (
   { location }:TShowLocationProps
 ) => ( <div>Current pathname:{ location.pathname }</div> )
 const PathName = withRouter(ShowLocation) // <-- withRouter passes history.location to the wrapped component
 
+
+// Pages
 const Home = () => <div>home</div>
 const PageA = () => <div>Page content a</div>
 const PageNoMatch = () => <div>Page no match</div>
+
+
 
 // App
 import { Route, Link, Switch } from 'react-router-dom'
@@ -34,17 +39,6 @@ const App = () => (
   </div>
 )
 
+export {App}
 
-// RouterApp
-import { history } from './store'
-import { ConnectedRouter } from 'connected-react-router'
-
-const RouterApp = () => (
-  <ConnectedRouter history={history}>
-    <App />
-  </ConnectedRouter>
-)
-
-
-export {App, RouterApp}
 
