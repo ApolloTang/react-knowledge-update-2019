@@ -4,25 +4,27 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk'
 
-import { createBrowserHistory } from 'history'
-const history = createBrowserHistory()
-
 
 
 // RootReducer
-const RootReducer = combineReducers({
+const rootReducer = combineReducers({
   foo: (s={})=>s
 })
+type TrootReducer = ReturnType<typeof rootReducer>
 
 
 // Store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
-  RootReducer,
+  rootReducer,
   composeEnhancers(
     applyMiddleware(thunk)
   )
 )
 
 
-export {store, history}
+export {
+  store,
+  rootReducer,
+  TrootReducer
+}
