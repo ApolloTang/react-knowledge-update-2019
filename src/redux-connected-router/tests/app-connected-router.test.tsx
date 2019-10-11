@@ -1,37 +1,49 @@
 import React from 'react'
 
-import { render, fireEvent, cleanup, RenderResult } from '@testing-library/react'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { render, fireEvent, RenderResult } from '@testing-library/react'
+import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { createMemoryHistory as createHistory } from 'history'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
-import { ConnectedRouter } from 'connected-react-router'
+
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router'
+import { History } from  'history'
 
 import {App} from '../app'
+import {rootReducer, history} from '../store'
+
+
+
+const renderWithConnectedRouter = (
+    _history: History,
+    _store: any // @TODO fix any
+  ) => ( ui:React.ReactNode ):RenderResult => {
+  return render(
+    <Provider store={_store}>
+      <ConnectedRouter history={_history}>
+        {ui}
+      </ConnectedRouter>
+    </Provider>
+  )
+}
+
 
 
 describe('[Connected Router]', () => {
-  beforeEach(()=>{ cleanup() }) // <------ cleanup not working ?
-  afterEach(()=>{ cleanup() }) // <------- cleanup not working ?
+  beforeEach(()=>{ })
+  afterEach(()=>{ })
 
   describe('Navigate to page a', () => {
 
     it('Connected Router Redux show navigate to page a', () => {
-      const history = createHistory()
-      const RootReducer = combineReducers( { router: connectRouter(history), })
-      const store = createStore( RootReducer, {}, applyMiddleware(routerMiddleware(history), thunk))
-      const rendered:RenderResult = render(
-        <Provider store={store}>
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
-        </Provider>
+      const store = createStore(
+        rootReducer,
+        {},
+        applyMiddleware(routerMiddleware(history), thunk)
       )
 
       const {
-        getByText, unmount
-      } = rendered
+        getByText
+      } = renderWithConnectedRouter(history, store)(<App />)
 
       const storeBeforeNavigate = store.getState()
       expect(storeBeforeNavigate.router.location.pathname).toBe('/')
@@ -41,40 +53,28 @@ describe('[Connected Router]', () => {
 
       const storeAfterNavigate = store.getState()
       expect(storeAfterNavigate.router.location.pathname).toBe('/a')
-
-      unmount() // <-- unmount() not working ????
     })
 
-    it('This test should fail if using createBrowserHistory, but pass if useing createMemoryHistory', () => {
-      const history = createHistory()
-      const RootReducer = combineReducers( { router: connectRouter(history), })
-      const store = createStore( RootReducer, {}, applyMiddleware(routerMiddleware(history), thunk))
-
-      const rendered:RenderResult = render(
-        <Provider store={store}>
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
-        </Provider>
+    it('Make sure jsDom is clear from state from previous state', () => {
+      const store = createStore(
+        rootReducer,
+        {},
+        applyMiddleware(routerMiddleware(history), thunk)
       )
 
       const {
         queryByText,
         debug, container
-      } = rendered
+      } = renderWithConnectedRouter(history, store)(<App />)
 
-      debug(container)                  //<--- show that jsDom was not clear: showing 'Page content a', ok w createMemoryHistory
+      debug(container)
       const pageContentA = queryByText('Page content a')
-      expect(pageContentA).toBeNull()  // <-------- Fail, but pass w crearteMemoryHistory !!!
-
+      expect(pageContentA).toBeNull()
       const storeBeforeNavigate = store.getState()
-      expect(storeBeforeNavigate.router.location.pathname).toBe('/')  //<------- Fail, but pass w createMemoryHistory!!!
-
+      expect(storeBeforeNavigate.router.location.pathname).toBe('/')
     })
   })
 
 })
-
-
 
 
