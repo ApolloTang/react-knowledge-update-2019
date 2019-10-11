@@ -1,12 +1,18 @@
 import React from 'react'
 
 import { render, fireEvent, RenderResult } from '@testing-library/react'
-import { createStore, applyMiddleware } from 'redux'
+import {
+  createStore, Store,
+  applyMiddleware
+} from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 
 import {App} from '../app'
-import {rootReducer, history} from '../store'
+import {
+  rootReducer,
+  history
+} from '../store'
 
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router'
 import { History } from  'history'
@@ -27,7 +33,7 @@ describe('[Connected Router]', () => {
 
       const {
         getByText
-      } = renderWithConnectedRouter(history, store)(<App />)
+      } = renderWithConnectedRouter(<App />, history, store)
 
       const storeBeforeNavigate = store.getState()
       expect(storeBeforeNavigate.router.location.pathname).toBe('/')
@@ -48,7 +54,7 @@ describe('[Connected Router]', () => {
 
       const {
         queryByText,
-      } = renderWithConnectedRouter(history, store)(<App />)
+      } = renderWithConnectedRouter(<App />, history, store)
 
       const pageContentA = queryByText('Page content a')
       expect(pageContentA).toBeNull()
@@ -62,16 +68,15 @@ describe('[Connected Router]', () => {
 
 
 function renderWithConnectedRouter(
-    _history: History,
-    _store: any // @TODO fix any
-) {
-  return function( ui:React.ReactNode ):RenderResult {
-    return render(
+  ui:React.ReactNode,
+  _history: History,
+  _store:Store
+):RenderResult {
+  return render(
     <Provider store={_store}>
       <ConnectedRouter history={_history}>
         {ui}
       </ConnectedRouter>
     </Provider>
-    )
-  }
+  )
 }

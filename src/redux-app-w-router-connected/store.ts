@@ -1,5 +1,5 @@
 import {
-  createStore,
+  createStore, Store,
   combineReducers, applyMiddleware, compose
 } from 'redux'
 import thunk from 'redux-thunk'
@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import { createBrowserHistory, createMemoryHistory } from 'history'
 
 
-const isTest = false // @TODO either use webpack or use mock module in test
+const isTest = true // @TODO either use webpack or use mock module in test
 // Howcome it is now irrelevant whether is is MemoryHistory or BrowserHistory ?
 const history = isTest ? createMemoryHistory() : createBrowserHistory()
 
@@ -31,9 +31,8 @@ const store = createStore(
   )
 )
 
-
 export {
-  store, history,
-  rootReducer,
-  TrootReducer
+  store,
+  rootReducer, TrootReducer,
+  history
 }
