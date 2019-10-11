@@ -5,27 +5,11 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 
-import { ConnectedRouter, routerMiddleware } from 'connected-react-router'
-import { History } from  'history'
-
 import {App} from '../app'
 import {rootReducer, history} from '../store'
 
-
-
-const renderWithConnectedRouter = (
-    _history: History,
-    _store: any // @TODO fix any
-  ) => ( ui:React.ReactNode ):RenderResult => {
-  return render(
-    <Provider store={_store}>
-      <ConnectedRouter history={_history}>
-        {ui}
-      </ConnectedRouter>
-    </Provider>
-  )
-}
-
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router'
+import { History } from  'history'
 
 
 describe('[Connected Router]', () => {
@@ -64,10 +48,8 @@ describe('[Connected Router]', () => {
 
       const {
         queryByText,
-        debug, container
       } = renderWithConnectedRouter(history, store)(<App />)
 
-      debug(container)
       const pageContentA = queryByText('Page content a')
       expect(pageContentA).toBeNull()
       const storeBeforeNavigate = store.getState()
@@ -78,3 +60,18 @@ describe('[Connected Router]', () => {
 })
 
 
+
+function renderWithConnectedRouter(
+    _history: History,
+    _store: any // @TODO fix any
+) {
+  return function( ui:React.ReactNode ):RenderResult {
+    return render(
+    <Provider store={_store}>
+      <ConnectedRouter history={_history}>
+        {ui}
+      </ConnectedRouter>
+    </Provider>
+    )
+  }
+}
