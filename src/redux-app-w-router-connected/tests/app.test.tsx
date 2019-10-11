@@ -63,6 +63,22 @@ describe('[Connected Router]', () => {
     })
   })
 
+  it('router can handle no match', () => {
+      const store = createStore(
+        rootReducer,
+        {},
+        applyMiddleware(routerMiddleware(history), thunk)
+      )
+
+      const {
+        getByText,
+      } = renderWithConnectedRouter(history, store)(<App />)
+
+      history.push('/does-not-exit')
+      getByText('Page no match')
+      const storeBeforeNavigate = store.getState()
+      expect(storeBeforeNavigate.router.location.pathname).toBe('/does-not-exit/')
+    })
 })
 
 
