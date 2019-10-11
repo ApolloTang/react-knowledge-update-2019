@@ -33,7 +33,7 @@ describe('[Connected Router]', () => {
 
       const {
         getByText
-      } = renderWithConnectedRouter(<App />, history, store)
+      } = renderWithConnectedRouter(history, store)(<App />)
 
       const storeBeforeNavigate = store.getState()
       expect(storeBeforeNavigate.router.location.pathname).toBe('/')
@@ -54,7 +54,7 @@ describe('[Connected Router]', () => {
 
       const {
         queryByText,
-      } = renderWithConnectedRouter(<App />, history, store)
+      } = renderWithConnectedRouter(history, store)(<App />)
 
       const pageContentA = queryByText('Page content a')
       expect(pageContentA).toBeNull()
@@ -67,16 +67,14 @@ describe('[Connected Router]', () => {
 
 
 
-function renderWithConnectedRouter(
-  ui:React.ReactNode,
-  _history: History,
-  _store:Store
-):RenderResult {
-  return render(
-    <Provider store={_store}>
-      <ConnectedRouter history={_history}>
-        {ui}
-      </ConnectedRouter>
-    </Provider>
-  )
+function renderWithConnectedRouter(_history: History, _store:Store){
+  return function( ui:React.ReactNode,):RenderResult {
+    return render(
+      <Provider store={_store}>
+        <ConnectedRouter history={_history}>
+          {ui}
+        </ConnectedRouter>
+      </Provider>
+    )
+  }
 }
