@@ -77,7 +77,7 @@ describe('[Connected Router]', () => {
       history.push('/does-not-exit')
       getByText('Page no match')
       const storeBeforeNavigate = store.getState()
-      expect(storeBeforeNavigate.router.location.pathname).toBe('/does-not-exit/')
+      expect(storeBeforeNavigate.router.location.pathname).toBe('/does-not-exit')
     })
 })
 
