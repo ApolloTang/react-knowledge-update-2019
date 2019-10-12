@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import {Tstore} from '../store'
-import { actions } from '../action'
+import { asyncActions } from '../action'
 
 import {
   mapStoreToProps,
@@ -64,7 +64,7 @@ describe('[Selector, mapDispatchToProps]', ()=>{
   } = mapDispatchToProps(fakeDispatch)
 
   it('fetch', ()=>{
-    const spy = jest.spyOn(actions, 'thunk_fetchSubreddit')
+    const spy = jest.spyOn(asyncActions, 'thunk_fetchSubreddit')
     dispatch_fetchSubredditPosts()
     expect(spy).toHaveBeenCalled()
     spy.mockRestore()

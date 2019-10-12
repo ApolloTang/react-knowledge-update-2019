@@ -59,7 +59,7 @@ const thunk_fetchSubreddit =
 }
 
 
-const actions = {
+const asyncActions = {
   thunk_fetchSubreddit,
   // thunk_postSubreddit    //<-- can have more thunk or action
 }
@@ -69,5 +69,5 @@ type Tactions = Tactions_fetchSubreddit
 export {
   actionNames,
   Tactions,
-  actions,
+  asyncActions,
 }

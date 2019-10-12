@@ -1,7 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk'
 
 import {
-  actions,
+  asyncActions,
   Tactions,
 } from './action'
 
@@ -34,7 +34,7 @@ const mapStoreToProps = (store:Tstore) => {
 
 const mapDispatchToProps = (dispatch:ThunkDispatch<Tstore, {}, Tactions>) => {
   const dispatch_fetchSubredditPosts = () => {
-    dispatch(actions.thunk_fetchSubreddit())
+    dispatch(asyncActions.thunk_fetchSubreddit())
   }
 
   return {

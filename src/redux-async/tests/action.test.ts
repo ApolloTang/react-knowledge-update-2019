@@ -7,7 +7,7 @@ import {ThunkDispatch} from 'redux-thunk'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import { actionNames, actions } from '../action'
+import { actionNames, asyncActions } from '../action'
 
 
 describe('[Selector, mapDispatchToProps]', ()=>{
@@ -30,7 +30,7 @@ describe('[Selector, mapDispatchToProps]', ()=>{
 
   it('thunk_fetchSubreddit should dispatch start and success', async()=>{
     fetchMock.get('https://www.reddit.com/r/reactjs.json', example_apiSubreddit)
-    await fakeDispatch(actions.thunk_fetchSubreddit())
+    await fakeDispatch(asyncActions.thunk_fetchSubreddit())
 
     const dipatchedActions = fakeStore.getActions()
     // dipatchedActions =
@@ -44,7 +44,7 @@ describe('[Selector, mapDispatchToProps]', ()=>{
 
   it('thunk_fetchSubreddit should dispatch start and fail', async()=>{
     fetchMock.get('https://www.reddit.com/r/reactjs.json', 500)
-    await fakeDispatch(actions.thunk_fetchSubreddit())
+    await fakeDispatch(asyncActions.thunk_fetchSubreddit())
 
     const dipatchedActions = fakeStore.getActions()
     // dispatchedActions =
