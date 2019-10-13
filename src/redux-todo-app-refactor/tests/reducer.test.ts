@@ -22,7 +22,7 @@ describe('Todo reducer', ()=>{
     expect(
       reducer(
         prevState,
-        actions.action_todos_add(nextState[0].id, nextState[0].text)
+        actions.todos_add(nextState[0].id, nextState[0].text)
       )
     ).toEqual(nextState)
   })
@@ -35,7 +35,7 @@ describe('Todo reducer', ()=>{
     const nextState:Ttodos = []
     expect(
       reducer(
-        prevState, actions.action_todos_delete(idToDelete)
+        prevState, actions.todos_delete(idToDelete)
       )
     ).toEqual(nextState)
   })
@@ -50,7 +50,7 @@ describe('Todo reducer', ()=>{
     ]
     expect(
       reducer(
-        prevState, actions.action_todos_toggle(idToToggle)
+        prevState, actions.todos_toggle(idToToggle)
       )
     ).toEqual(nextState)
   })
