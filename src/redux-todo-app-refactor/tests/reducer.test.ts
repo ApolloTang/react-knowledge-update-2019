@@ -4,7 +4,7 @@ import reducer,  {
 import { Ttodos } from '../model'
 import {
   TACrtors_Todos,
-  ACrtors_Todos
+  actions
 } from '../action'
 
 
@@ -22,7 +22,7 @@ describe('Todo reducer', ()=>{
     expect(
       reducer(
         prevState,
-        ACrtors_Todos.action_todos_add(nextState[0].id, nextState[0].text)
+        actions.action_todos_add(nextState[0].id, nextState[0].text)
       )
     ).toEqual(nextState)
   })
@@ -35,7 +35,7 @@ describe('Todo reducer', ()=>{
     const nextState:Ttodos = []
     expect(
       reducer(
-        prevState, ACrtors_Todos.action_todos_delete(idToDelete)
+        prevState, actions.action_todos_delete(idToDelete)
       )
     ).toEqual(nextState)
   })
@@ -50,7 +50,7 @@ describe('Todo reducer', ()=>{
     ]
     expect(
       reducer(
-        prevState, ACrtors_Todos.action_todos_toogle(idToToggle)
+        prevState, actions.action_todos_toggle(idToToggle)
       )
     ).toEqual(nextState)
   })

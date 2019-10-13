@@ -1,6 +1,6 @@
 import {
   actionNames,
-  ACrtors_Todos
+  actions
 } from '../action'
 
 
@@ -12,7 +12,7 @@ describe('Todo action', ()=>{
       type: actionNames.todos_add,
       payload: { newId, text }
     }
-    expect(ACrtors_Todos.action_todos_add(newId, text)).toEqual(expectedAction)
+    expect(actions.action_todos_add(newId, text)).toEqual(expectedAction)
    })
 
   it('Should create an action to delete a todo', () => {
@@ -21,7 +21,7 @@ describe('Todo action', ()=>{
       type: actionNames.todos_delete,
       payload: { id:idToDelete }
     }
-    expect(ACrtors_Todos.action_todos_delete(idToDelete)).toEqual(expectedAction)
+    expect(actions.action_todos_delete(idToDelete)).toEqual(expectedAction)
    })
 
   it('Should create an action to toggle a todo', () => {
@@ -30,6 +30,6 @@ describe('Todo action', ()=>{
       type: actionNames.todos_toggle,
       payload: { id:idToToggle }
     }
-    expect(ACrtors_Todos.action_todos_toogle(idToToggle)).toEqual(expectedAction)
+    expect(actions.action_todos_toggle(idToToggle)).toEqual(expectedAction)
    })
 })
