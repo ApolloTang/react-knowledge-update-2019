@@ -9,7 +9,7 @@ describe('Todo action', ()=>{
     const newId = 'newId'
     const text = 'learn react'
     const expectedAction = {
-      type: actionNames.ADD,
+      type: actionNames.todos_add,
       payload: { newId, text }
     }
     expect(ACrtors_Todos.ACrtor_add(newId, text)).toEqual(expectedAction)
@@ -18,7 +18,7 @@ describe('Todo action', ()=>{
   it('Should create an action to delete a todo', () => {
     const idToDelete = 'idToDelete'
     const expectedAction = {
-      type: actionNames.DELETE,
+      type: actionNames.todos_delete,
       payload: { id:idToDelete }
     }
     expect(ACrtors_Todos.ACrtor_delete(idToDelete)).toEqual(expectedAction)
@@ -27,7 +27,7 @@ describe('Todo action', ()=>{
   it('Should create an action to toggle a todo', () => {
     const idToToggle = 'idToggle'
     const expectedAction = {
-      type: actionNames.TOGGLE,
+      type: actionNames.todos_toggle,
       payload: { id:idToToggle }
     }
     expect(ACrtors_Todos.ACrtor_toggle(idToToggle)).toEqual(expectedAction)

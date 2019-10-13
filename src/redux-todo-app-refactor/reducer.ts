@@ -17,19 +17,19 @@ function todosReducer(
   action:TACrtors_Todos
 ):Ttodos {
   switch (action.type) {
-    case actionNames.ADD: {
+    case actionNames.todos_add: {
       type Tadd = typeof action
       const newId = action && action.payload && action.payload.newId
       const text = action && action.payload && action.payload.text
       const newTodo:Ttodo = {id:newId, text, completed:false}
       return [...state, newTodo]
     }
-    case actionNames.DELETE: {
+    case actionNames.todos_delete: {
       type Tdelete = typeof action
       const id = action && action.payload && action.payload.id
       return state.filter(prevTodo=>prevTodo.id !==id)
     }
-    case actionNames.TOGGLE: {
+    case actionNames.todos_toggle: {
       type Ttoggle = typeof action
       const id = action && action.payload && action.payload.id
       return state.map(
