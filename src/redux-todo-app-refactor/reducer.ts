@@ -1,5 +1,5 @@
 import {
-  ANames_Todos,
+  actionNames,
   TACrtors_Todos
 } from './action'
 
@@ -17,19 +17,19 @@ function todosReducer(
   action:TACrtors_Todos
 ):Ttodos {
   switch (action.type) {
-    case ANames_Todos.ADD: {
+    case actionNames.ADD: {
       type Tadd = typeof action
       const newId = action && action.payload && action.payload.newId
       const text = action && action.payload && action.payload.text
       const newTodo:Ttodo = {id:newId, text, completed:false}
       return [...state, newTodo]
     }
-    case ANames_Todos.DELETE: {
+    case actionNames.DELETE: {
       type Tdelete = typeof action
       const id = action && action.payload && action.payload.id
       return state.filter(prevTodo=>prevTodo.id !==id)
     }
-    case ANames_Todos.TOGGLE: {
+    case actionNames.TOGGLE: {
       type Ttoggle = typeof action
       const id = action && action.payload && action.payload.id
       return state.map(

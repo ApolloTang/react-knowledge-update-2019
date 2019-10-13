@@ -1,20 +1,25 @@
-enum ANames_Todos {
+enum actionNames {
   ADD = 'ADD',
   DELETE = 'DELETE',
   TOGGLE = 'TOGGLE',
 }
 
+// enum actionNames {
+//   fetchSubreddit_start = 'fetchSubreddit_start',
+//   fetchSubreddit_success = 'fetchSubreddit_success',
+//   fetchSubreddit_fail = 'fetchSubreddit_fail',
+// }
 
 const ACrtor_add = (newId:string, text:string) => ({
-  type: ANames_Todos.ADD as ANames_Todos.ADD,
+  type: actionNames.ADD as actionNames.ADD,
   payload: {newId, text}
 })
 const ACrtor_delete = (id:string) => ({
-  type: ANames_Todos.DELETE as ANames_Todos.DELETE,
+  type: actionNames.DELETE as actionNames.DELETE,
   payload: {id}
 })
 const ACrtor_toggle = (id:string) => ({
-  type: ANames_Todos.TOGGLE as ANames_Todos.TOGGLE,
+  type: actionNames.TOGGLE as actionNames.TOGGLE,
   payload: {id}
 })
 
@@ -32,7 +37,7 @@ const ACrtors_Todos = {
 
 
 export {
-  ANames_Todos,
+  actionNames,
   ACrtors_Todos,
   TACrtors_Todos
 }
