@@ -8,23 +8,16 @@ const mapStoreToProps = (store:Store) => {
   return {todos: store.todos}
 }
 
-interface TDispatch {
-  addTodo: (text:string) => void
-  deleteTodo: (id:string) => void
-  toggleTodo: (id:string) => void
-}
-
 
 const mapDispatchToProps = (dispatch:Dispatch) => {
-
-  const dispatch_addTodo:TDispatch['addTodo'] = (text) => {
+  const dispatch_addTodo = (text:string) => {
     const newId:string = Date.now()+''
     dispatch(actions.todos_add(newId, text))
   }
-  const dispatch_deleteTodo:TDispatch['deleteTodo'] = (id) => {
+  const dispatch_deleteTodo = (id:string) => {
     dispatch(actions.todos_delete(id))
   }
-  const dispatch_toggleTodo:TDispatch['toggleTodo'] = (id) => {
+  const dispatch_toggleTodo = (id:string) => {
     dispatch(actions.todos_toggle(id))
   }
 
@@ -35,8 +28,14 @@ const mapDispatchToProps = (dispatch:Dispatch) => {
   }
 }
 
+
+type TmapDispatchToProps = ReturnType<typeof mapDispatchToProps>
+type TmapStoreToProps = ReturnType<typeof mapStoreToProps>
+
+
 export {
-  TDispatch,
+  TmapDispatchToProps,
+  TmapStoreToProps,
   mapStoreToProps,
   mapDispatchToProps
 }

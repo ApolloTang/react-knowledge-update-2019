@@ -3,17 +3,19 @@ import {useState} from 'react'
 import {connect} from 'react-redux'
 
 import {
-  TDispatch,
-  mapStoreToProps, mapDispatchToProps
+  TmapDispatchToProps,
+  TmapStoreToProps,
+  mapStoreToProps,
+  mapDispatchToProps
 } from './selector'
-
-
-interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
-  'new-todo': HTMLInputElement
-}
 
 import {Ttodo, Ttodos} from './model'
 
+
+
+// ===================
+// TodoItem component
+// ===================
 interface TTodoItemProps {
   todo: Ttodo
   deleteTodo: ()=>void
@@ -35,11 +37,17 @@ const TodoItem = ({todo, deleteTodo, toggleTodo}:TTodoItemProps) => {
   )
 }
 
-interface TAppProps {
+
+
+// ====
+// App
+// ====
+type TAppProps = {
   todos: Ttodos
-  dispatch_addTodo:TDispatch['addTodo']
-  dispatch_deleteTodo:TDispatch['deleteTodo']
-  dispatch_toggleTodo:TDispatch['toggleTodo']
+} & TmapStoreToProps & TmapDispatchToProps
+
+interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
+  'new-todo': HTMLInputElement
 }
 
 const App = ({
