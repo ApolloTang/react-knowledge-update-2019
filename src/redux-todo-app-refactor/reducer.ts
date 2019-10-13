@@ -3,13 +3,13 @@ import {
   TACrtors_Todos
 } from './action'
 
-interface Todo {
+interface Ttodo {
   id: string
   text: string
   completed: boolean
 }
 
-type Ttodos = ReadonlyArray<Todo>
+type Ttodos = ReadonlyArray<Ttodo>
 
 
 const initialState:Ttodos = []
@@ -24,7 +24,7 @@ function todosReducer(
       type Tadd = typeof action
       const newId = action && action.payload && action.payload.newId
       const text = action && action.payload && action.payload.text
-      const newTodo:Todo = {id:newId, text, completed:false}
+      const newTodo:Ttodo = {id:newId, text, completed:false}
       return [...state, newTodo]
     }
     case ANames_Todos.DELETE: {
@@ -51,7 +51,7 @@ function todosReducer(
 }
 
 export {
-  Ttodos, Todo,
+  Ttodos, Ttodo,
   initialState,
 }
 export default todosReducer
