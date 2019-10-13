@@ -14,13 +14,13 @@ interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
 
 import {Ttodo, Ttodos} from './model'
 
-interface TodosProps {
+interface TTodoItemProps {
   todo: Ttodo
   deleteTodo: ()=>void
   toggleTodo: ()=>void
 }
 
-const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
+const TodoItem = ({todo, deleteTodo, toggleTodo}:TTodoItemProps) => {
   return (
     <div data-testid="todo-item">
       <button onClick={deleteTodo}>x</button>
@@ -35,7 +35,7 @@ const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
   )
 }
 
-interface AppProps {
+interface TAppProps {
   todos: Ttodos
   dispatch_addTodo:TDispatch['addTodo']
   dispatch_deleteTodo:TDispatch['deleteTodo']
@@ -47,7 +47,7 @@ const App = ({
   dispatch_addTodo,
   dispatch_deleteTodo,
   dispatch_toggleTodo
-}:AppProps) => {
+}:TAppProps) => {
   const [todoInputText, setTodoInputText] = useState<string>('')
 
   const handle_newTodoChange = (e:React.FormEvent) => {
