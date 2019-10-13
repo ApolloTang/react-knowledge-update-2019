@@ -2,7 +2,7 @@ import {createStore} from 'redux'
 import {combineReducers} from 'redux'
 
 import todosReducer, {
-  Todos
+  Ttodos
 } from './reducer'
 
 
@@ -13,7 +13,7 @@ const rootReducer = combineReducers(
 )
 
 interface Store {
-  todos: Todos
+  todos: Ttodos
 }
 
 const store = createStore(

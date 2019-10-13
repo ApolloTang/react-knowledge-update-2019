@@ -12,7 +12,7 @@ interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
   'new-todo': HTMLInputElement
 }
 
-import {Todo, Todos} from './reducer'
+import {Todo, Ttodos} from './reducer'
 
 interface TodosProps {
   todo: Todo
@@ -36,7 +36,7 @@ const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
 }
 
 interface AppProps {
-  todos: Todos
+  todos: Ttodos
   dispatch_addTodo:TDispatch['addTodo']
   dispatch_deleteTodo:TDispatch['deleteTodo']
   dispatch_toggleTodo:TDispatch['toggleTodo']

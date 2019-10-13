@@ -9,16 +9,16 @@ interface Todo {
   completed: boolean
 }
 
-type Todos = ReadonlyArray<Todo>
+type Ttodos = ReadonlyArray<Todo>
 
 
-const initialState:Todos = []
+const initialState:Ttodos = []
 
 
 function todosReducer(
-  state:Todos = initialState,
+  state:Ttodos = initialState,
   action:TACrtors_Todos
-):Todos {
+):Ttodos {
   switch (action.type) {
     case ANames_Todos.ADD: {
       type Tadd = typeof action
@@ -51,7 +51,7 @@ function todosReducer(
 }
 
 export {
-  Todos, Todo,
+  Ttodos, Todo,
   initialState,
 }
 export default todosReducer

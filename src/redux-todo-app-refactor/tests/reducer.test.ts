@@ -1,6 +1,6 @@
 import reducer,  {
   initialState,
-  Todos
+  Ttodos
 } from '../reducer'
 import {
   TACrtors_Todos,
@@ -15,8 +15,8 @@ describe('Todo reducer', ()=>{
   })
 
   it('Can add new todor', ()=>{
-    const prevState:Todos = []
-    const nextState:Todos = [
+    const prevState:Ttodos = []
+    const nextState:Ttodos = [
       {id: 'newID', text:'learn react', completed:false}
     ]
     expect(
@@ -29,10 +29,10 @@ describe('Todo reducer', ()=>{
 
   it('Can delete todo', ()=>{
     const idToDelete = 'idToDelete'
-    const prevState:Todos = [
+    const prevState:Ttodos = [
       {id: idToDelete, text:'learn react', completed:false}
     ]
-    const nextState:Todos = []
+    const nextState:Ttodos = []
     expect(
       reducer(
         prevState, ACrtors_Todos.ACrtor_delete(idToDelete)
@@ -42,10 +42,10 @@ describe('Todo reducer', ()=>{
 
   it('Can toggle todo', ()=>{
     const idToToggle = 'idToToggle'
-    const prevState:Todos = [
+    const prevState:Ttodos = [
       {id: idToToggle, text:'learn react', completed:false}
     ]
-    const nextState:Todos = [
+    const nextState:Ttodos = [
       {id: idToToggle, text:'learn react', completed:true}
     ]
     expect(
