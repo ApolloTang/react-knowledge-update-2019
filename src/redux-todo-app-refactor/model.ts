@@ -7,12 +7,12 @@ const exampleData_todos = [
   {
     id: '123',
     text: 'do something',
-    complete: true
+    completed: true
   },
   {
     id: '124',
     text: 'do something',
-    complete: true
+    completed: true
   }
 ]
 

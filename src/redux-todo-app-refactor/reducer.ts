@@ -3,13 +3,10 @@ import {
   TACrtors_Todos
 } from './action'
 
-interface Ttodo {
-  id: string
-  text: string
-  completed: boolean
-}
-
-type Ttodos = ReadonlyArray<Ttodo>
+import {
+  Ttodo,
+  Ttodos
+} from './model'
 
 
 const initialState:Ttodos = []
