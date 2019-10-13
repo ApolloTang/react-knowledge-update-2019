@@ -3,14 +3,14 @@ import reducer,  {
 } from '../reducer'
 import { Ttodos } from '../model'
 import {
-  TACrtors_Todos,
+  Tactions,
   actions
 } from '../action'
 
 
 describe('Todo reducer', ()=>{
   it('Should return the initail state', ()=>{
-    const nonTodosAction = {} as TACrtors_Todos
+    const nonTodosAction = {} as Tactions
     expect(reducer(undefined, nonTodosAction)).toEqual(initialState)
   })
 

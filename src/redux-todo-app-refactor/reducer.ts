@@ -1,6 +1,6 @@
 import {
   actionNames,
-  TACrtors_Todos
+  Tactions
 } from './action'
 
 import {
@@ -14,7 +14,7 @@ const initialState:Ttodos = []
 
 function todosReducer(
   state:Ttodos = initialState,
-  action:TACrtors_Todos
+  action:Tactions
 ):Ttodos {
   switch (action.type) {
     case actionNames.todos_add: {

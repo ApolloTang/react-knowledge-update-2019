@@ -18,11 +18,6 @@ const todos_toggle = (id:string) => ({
   payload: {id}
 })
 
-type TACrtors_Todos =
-  ReturnType<typeof todos_add> |
-  ReturnType<typeof todos_delete> |
-  ReturnType<typeof todos_toggle>
-
 
 const actions = {
   todos_add,
@@ -31,9 +26,15 @@ const actions = {
 }
 
 
+type Tactions =
+  ReturnType<typeof actions.todos_add> |
+  ReturnType<typeof actions.todos_delete> |
+  ReturnType<typeof actions.todos_toggle>
+
+
 export {
   actionNames,
   actions,
-  TACrtors_Todos
+  Tactions
 }
 
