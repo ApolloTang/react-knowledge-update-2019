@@ -55,7 +55,7 @@ type TpostData_api = Tpost_api['data']
 // reducer schema
 // ==============
 type Tsubreddit_reducer = typeof exampleData_reducerSubrediddit
-type Tposts = Tsubreddit_reducer['posts']
+type Tposts = Tsubreddit_reducer['posts']  // @TODO this should be readonly
 type Tpost= Tposts[0]
 
 

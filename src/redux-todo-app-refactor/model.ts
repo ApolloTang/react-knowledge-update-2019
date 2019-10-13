@@ -16,11 +16,13 @@ const exampleData_todos = [
   }
 ]
 
-
+// =======================
 // Todos schema in reducer
-type Ttodos = typeof exampleData_todos
-type Ttodo = Ttodos[0]
-
+// =======================
+type Ttodo = typeof exampleData_todos[0]
+type Ttodos = ReadonlyArray<Ttodo>
+//            ^^^^^^^^^^^^^ Read only,
+//            if you need to change it you need to clone it.
 
 export {
   Ttodos,
