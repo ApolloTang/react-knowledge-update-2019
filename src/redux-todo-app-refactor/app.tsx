@@ -9,15 +9,13 @@ import {
   mapDispatchToProps
 } from './selector'
 
-import {Ttodo, Ttodos} from './model'
-
 
 
 // ===================
 // TodoItem component
 // ===================
 interface TTodoItemProps {
-  todo: Ttodo
+  todo: TmapStoreToProps['todos'][0]
   deleteTodo: ()=>void
   toggleTodo: ()=>void
 }
@@ -43,7 +41,6 @@ const TodoItem = ({todo, deleteTodo, toggleTodo}:TTodoItemProps) => {
 // App
 // ====
 type TAppProps = {
-  todos: Ttodos
 } & TmapStoreToProps & TmapDispatchToProps
 
 interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
