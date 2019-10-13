@@ -12,7 +12,7 @@ interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
   'new-todo': HTMLInputElement
 }
 
-import {Ttodo, Ttodos} from './reducer'
+import {Ttodo, Ttodos} from './model'
 
 interface TodosProps {
   todo: Ttodo

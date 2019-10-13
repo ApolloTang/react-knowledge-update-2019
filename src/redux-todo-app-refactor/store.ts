@@ -1,10 +1,11 @@
 import {createStore} from 'redux'
 import {combineReducers} from 'redux'
 
-import todosReducer, {
-  Ttodos
-} from './reducer'
+import todosReducer from './reducer'
 
+import {
+  Ttodos
+} from './model'
 
 const rootReducer = combineReducers(
   {

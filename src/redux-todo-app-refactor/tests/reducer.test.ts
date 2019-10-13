@@ -1,7 +1,7 @@
 import reducer,  {
   initialState,
-  Ttodos
 } from '../reducer'
+import { Ttodos } from '../model'
 import {
   TACrtors_Todos,
   ACrtors_Todos

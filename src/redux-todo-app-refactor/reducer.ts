@@ -48,7 +48,6 @@ function todosReducer(
 }
 
 export {
-  Ttodos, Ttodo,
   initialState,
 }
 export default todosReducer
