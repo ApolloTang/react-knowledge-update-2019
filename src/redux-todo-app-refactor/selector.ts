@@ -19,13 +19,13 @@ const mapDispatchToProps = (dispatch:Dispatch) => {
 
   const dispatch_addTodo:TDispatch['addTodo'] = (text) => {
     const newId:string = Date.now()+''
-    dispatch(ACrtors_Todos.ACrtor_add(newId, text))
+    dispatch(ACrtors_Todos.action_todos_add(newId, text))
   }
   const dispatch_deleteTodo:TDispatch['deleteTodo'] = (id) => {
-    dispatch(ACrtors_Todos.ACrtor_delete(id))
+    dispatch(ACrtors_Todos.action_todos_delete(id))
   }
   const dispatch_toggleTodo:TDispatch['toggleTodo'] = (id) => {
-    dispatch(ACrtors_Todos.ACrtor_toggle(id))
+    dispatch(ACrtors_Todos.action_todos_toogle(id))
   }
 
   return {

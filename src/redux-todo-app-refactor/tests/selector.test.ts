@@ -31,7 +31,7 @@ describe('Todo selector, mapDispatchToProps', ()=>{
   } = mapDispatchToProps(mockDispatch)
 
   it('Can dispatch ACrtors_Todos.Acrtor_add ', () => {
-    const spy = jest.spyOn(ACrtors_Todos, 'ACrtor_add')
+    const spy = jest.spyOn(ACrtors_Todos, 'action_todos_add')
 
     const todoText = 'learn react'
     const dateBefore = Date.now()
@@ -48,8 +48,8 @@ describe('Todo selector, mapDispatchToProps', ()=>{
     spy.mockRestore()
   })
 
-  it('Can dispatch ACrtors_Todos.ACrtor_delete ', () => {
-    const spy = jest.spyOn(ACrtors_Todos, 'ACrtor_delete')
+  it('Can dispatch ACrtors_Todos.action_todos_delete ', () => {
+    const spy = jest.spyOn(ACrtors_Todos, 'action_todos_delete')
     const someId = 'someId'
     dispatch_deleteTodo(someId)
     const called_deleteId = spy.mock.calls[0][0]
@@ -57,8 +57,8 @@ describe('Todo selector, mapDispatchToProps', ()=>{
     spy.mockRestore()
   })
 
-  it('Can dispatch ACrtors_Todos.ACrtor_toggle ', () => {
-    const spy = jest.spyOn(ACrtors_Todos, 'ACrtor_toggle')
+  it('Can dispatch ACrtors_Todos.action_todos_toogle ', () => {
+    const spy = jest.spyOn(ACrtors_Todos, 'action_todos_toogle')
     const someId = 'someId'
     dispatch_toggleTodo(someId)
     const called_deleteId = spy.mock.calls[0][0]
