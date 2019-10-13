@@ -30,7 +30,7 @@ describe('Todo selector, mapDispatchToProps', ()=>{
     dispatch_toggleTodo,
   } = mapDispatchToProps(mockDispatch)
 
-  it('Can dispatch ACrtors_Todos.Acrtor_add ', () => {
+  it('Can dispatch actions.todo_add ', () => {
     const spy = jest.spyOn(actions, 'todos_add')
 
     const todoText = 'learn react'
@@ -48,7 +48,7 @@ describe('Todo selector, mapDispatchToProps', ()=>{
     spy.mockRestore()
   })
 
-  it('Can dispatch ACrtors_Todos.todos_delete ', () => {
+  it('Can dispatch actions.todos_delete ', () => {
     const spy = jest.spyOn(actions, 'todos_delete')
     const someId = 'someId'
     dispatch_deleteTodo(someId)
@@ -57,7 +57,7 @@ describe('Todo selector, mapDispatchToProps', ()=>{
     spy.mockRestore()
   })
 
-  it('Can dispatch ACrtors_Todos.ACrtor_toggle ', () => {
+  it('Can dispatch actions.todos_toggle ', () => {
     const spy = jest.spyOn(actions, 'todos_toggle')
     const someId = 'someId'
     dispatch_toggleTodo(someId)
