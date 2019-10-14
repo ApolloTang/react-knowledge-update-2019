@@ -71,7 +71,8 @@ const App = ({
 }
 
 
-export default connect(mapStoreToProps, mapDispatchToProps)(App)
+const ConnectedApp = connect(mapStoreToProps, mapDispatchToProps)(App)
+export {ConnectedApp}
 
 
 

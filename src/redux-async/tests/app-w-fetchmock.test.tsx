@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 
 import { render, wait} from '@testing-library/react'
 
-import App from '../app'
+import { ConnectedApp } from '../app'
 import {rootReducer} from '../store'
 import {
   example_apiSubreddit,
@@ -36,7 +36,7 @@ describe('[Using mock-fetch]', () => {
     const {
       getByText,
       queryByText
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
 
     await wait(
       () => {
@@ -67,7 +67,7 @@ describe('[Using mock-fetch]', () => {
     const {
       getByTestId,
       getByText
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
 
     await wait(
       () => {

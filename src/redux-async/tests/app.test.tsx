@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 
 import { render, wait, fireEvent } from '@testing-library/react'
 
-import App from '../app'
+import { ConnectedApp } from '../app'
 import {rootReducer} from '../store'
 import { Tposts } from  '../model'
 
@@ -72,7 +72,7 @@ describe('[Fetching Subreddit App]', () => {
     const {
       getByText,
       queryByText
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     await wait(
       () => {
         getByText(/loading/i)
@@ -90,7 +90,7 @@ describe('[Fetching Subreddit App]', () => {
     const {
       getByText,
       queryByText
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     await wait(
       () => {
         getByText(new RegExp(mockPosts1[0].author, 'i'))
@@ -108,7 +108,7 @@ describe('[Fetching Subreddit App]', () => {
   it('Refresh button should be disable during loading', async () => {
     const {
       getByText,
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     await wait(
       () => {
         getByText(/loading/i)
@@ -122,7 +122,7 @@ describe('[Fetching Subreddit App]', () => {
     const {
       getByText,
       queryByText
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     await wait(
       () => {
         expect(queryByText(/loading/i)).toBeNull()
@@ -136,7 +136,7 @@ describe('[Fetching Subreddit App]', () => {
     const {
       getByText,
       queryByText
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     await wait(
       () => {
         expect(queryByText(/loading/i)).toBeNull()
@@ -151,7 +151,7 @@ describe('[Fetching Subreddit App]', () => {
     const {
       getByText,
       getByTestId,
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     await wait(
       async () => {
         const lastUpdate_beforeRefresh = getByTestId('last-update')
@@ -174,7 +174,7 @@ describe('[Fetching Subreddit App]', () => {
     const {
       getByText,
       queryByText,
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     await wait(
       async () => {
         getByText( new RegExp(mockPosts1[0].title, 'i') )
