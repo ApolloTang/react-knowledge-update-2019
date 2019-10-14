@@ -1,6 +1,6 @@
 import {
   actionNames,
-  TACrtors_Counter
+  Tactions
 } from './action'
 
 interface State {
@@ -11,7 +11,7 @@ const initialState:State = {count:0}
 
 function reducer(
   state:State = initialState,
-  action:TACrtors_Counter
+  action:Tactions
 ):State {
   switch (action.type) {
     case actionNames.INCREMENT:

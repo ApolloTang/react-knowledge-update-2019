@@ -1,12 +1,12 @@
 import { initialState, reducer } from '../reducer'
 import {
   actions,
-  TACrtors_Counter
+  Tactions
 } from '../action'
 
 describe('Counter reducer', ()=>{
   it('Should return the initail state', ()=>{
-    const nonCounterAction = {} as TACrtors_Counter
+    const nonCounterAction = {} as Tactions
     expect(reducer(undefined, nonCounterAction)).toEqual(initialState)
   })
 

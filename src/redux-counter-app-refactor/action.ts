@@ -12,7 +12,7 @@ const counter_decrease = () => ({
 })
 
 
-type TACrtors_Counter =
+type Tactions =
   ReturnType<typeof counter_increase> | ReturnType<typeof counter_decrease>
 
 
@@ -25,6 +25,6 @@ const actions = {
 export {
   actionNames,
   actions,
-  TACrtors_Counter
+  Tactions
 }
 
