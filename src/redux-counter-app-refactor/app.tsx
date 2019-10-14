@@ -24,7 +24,11 @@ const App = (
   </div>
 )
 
-export default connect(
+const ConnectedApp =  connect(
   mapStoreToProps,
   mapDispatchToProps
 )(App)
+
+export {
+  ConnectedApp
+}

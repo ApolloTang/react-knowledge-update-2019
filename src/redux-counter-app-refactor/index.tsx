@@ -17,8 +17,8 @@ declare global {
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 
-import App from './app'
-import reducer from './reducer'
+import {ConnectedApp} from './app'
+import {reducer} from './reducer'
 
 
 const store = createStore(
@@ -29,7 +29,7 @@ const store = createStore(
 // =====================================
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedApp />
   </Provider>,
   document.getElementById('app')
 )

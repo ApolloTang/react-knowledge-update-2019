@@ -1,6 +1,4 @@
-import reducer,  {
-  initialState,
-} from '../reducer'
+import { initialState, reducer } from '../reducer'
 import {
   ACrtors_Counter,
   TACrtors_Counter

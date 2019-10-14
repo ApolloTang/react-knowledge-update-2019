@@ -8,8 +8,8 @@ import {
   fireEvent
 } from '@testing-library/react'
 
-import reducer from '../reducer'
-import ConnectedApp from '../app'
+import {reducer} from '../reducer'
+import {ConnectedApp} from '../app'
 
 
 test('can render app with redux defaults state', ()=>{

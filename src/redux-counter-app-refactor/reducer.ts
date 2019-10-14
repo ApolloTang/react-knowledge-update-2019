@@ -35,6 +35,6 @@ function reducer(
 export {
   State,
   initialState,
+  reducer
 }
 
-export default reducer
