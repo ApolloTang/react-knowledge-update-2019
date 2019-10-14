@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import {rootReducer} from '../store'
-import App from '../app'
+import {ConnectedApp} from '../app'
 
 function renderWithStore(
   ui:React.ReactNode,
@@ -22,7 +22,7 @@ describe('Todo App',()=>{
   test('Render a "Adding todo" input field', () =>{
     const {
       getByLabelText,
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     getByLabelText(/add.todo/i)
   })
 
@@ -30,7 +30,7 @@ describe('Todo App',()=>{
   test('Add todo input take user values', () =>{
     const {
       getByLabelText,
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     const newTodoInput = getByLabelText(/add.todo/i) as HTMLInputElement
     const todo1 = 'learn react'
     userEvent.type(newTodoInput, todo1)
@@ -42,7 +42,7 @@ describe('Todo App',()=>{
     const {
       getByLabelText,
       getByTestId,
-    } = renderWithStore(<App/>)
+    } = renderWithStore(<ConnectedApp/>)
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
     ]
@@ -70,7 +70,7 @@ describe('Todo App',()=>{
       getByText,
       getByTestId,
       getAllByTestId
-      } = renderWithStore(<App/>)
+      } = renderWithStore(<ConnectedApp/>)
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
     ]
@@ -109,7 +109,7 @@ describe('Todo App',()=>{
       getByLabelText,
       getByTestId,
       getAllByTestId
-      } = renderWithStore(<App/>)
+      } = renderWithStore(<ConnectedApp/>)
 
     const todoTexts = [
       'learn react', 'learn redux', 'learn typescript'
