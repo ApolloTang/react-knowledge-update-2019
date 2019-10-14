@@ -42,3 +42,21 @@ test('can increase counter from default state', ()=>{
   fireEvent.click(increaseButton)
   expect(counterDisplay).toHaveTextContent('1')
 })
+
+
+test('can decrease counter from default state', ()=>{
+  const store = createStore(reducer)
+  const {
+    getByText,
+    getByTestId
+  } = render(
+    <Provider store={store} >
+      <ConnectedApp />
+    </Provider>
+  )
+  const counterDisplay = getByTestId('count-value')
+  const increaseButton = getByText('-')
+  expect(counterDisplay).toHaveTextContent('0')
+  fireEvent.click(increaseButton)
+  expect(counterDisplay).toHaveTextContent('-1')
+})
