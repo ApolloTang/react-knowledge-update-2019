@@ -2,7 +2,7 @@ import React from 'react'
 import {render, fireEvent, within, getNodeText} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import App from './app'
+import {App} from './app'
 
 describe('Todo App',()=>{
   test('Render a "Adding todo" input field', () =>{
