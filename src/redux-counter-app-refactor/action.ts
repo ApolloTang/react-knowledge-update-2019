@@ -1,14 +1,14 @@
 enum actionNames {
-  INCREMENT = 'INCREMENT',
-  DECREMENT = 'DECREMENT'
+  counter_increase = 'counter_increase',
+  counter_decrease = 'counter_decrease'
 }
 
 
 const counter_increase = () => ({
-  type: actionNames.INCREMENT as actionNames.INCREMENT
+  type: actionNames.counter_increase as actionNames.counter_increase
 })
 const counter_decrease = () => ({
-  type: actionNames.DECREMENT as actionNames.DECREMENT
+  type: actionNames.counter_decrease as actionNames.counter_decrease
 })
 
 

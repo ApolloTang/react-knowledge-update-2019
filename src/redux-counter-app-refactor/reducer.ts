@@ -14,13 +14,13 @@ function reducer(
   action:Tactions
 ):State {
   switch (action.type) {
-    case actionNames.INCREMENT:
+    case actionNames.counter_increase:
       type inc = typeof action
       return {
         ...state,
         count: state.count + 1
       }
-    case actionNames.DECREMENT:
+    case actionNames.counter_decrease:
       type dec = typeof action
       return {
         ...state,
