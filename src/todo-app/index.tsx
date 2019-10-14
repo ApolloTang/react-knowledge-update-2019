@@ -7,7 +7,7 @@ document.body.appendChild(container)
 
 // =====================================
 
-import App from './app'
+import {App} from './app'
 
 
 // =====================================
