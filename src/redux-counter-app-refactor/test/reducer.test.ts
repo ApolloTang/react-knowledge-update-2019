@@ -1,10 +1,10 @@
 import reducer,  {
   initialState,
-} from './reducer'
+} from '../reducer'
 import {
   ACrtors_Counter,
   TACrtors_Counter
-} from './action'
+} from '../action'
 
 describe('Counter reducer', ()=>{
   it('Should return the initail state', ()=>{
