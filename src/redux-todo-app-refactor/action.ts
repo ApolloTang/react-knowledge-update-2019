@@ -5,9 +5,9 @@ enum actionNames {
 }
 
 
-const todos_add = (newId:string, text:string) => ({
+const todos_add = (newId:string, timeStamp:number, text:string) => ({
   type: actionNames.todos_add as actionNames.todos_add,
-  payload: {newId, text}
+  payload: {newId, timeStamp, text}
 })
 const todos_delete = (id:string) => ({
   type: actionNames.todos_delete as actionNames.todos_delete,

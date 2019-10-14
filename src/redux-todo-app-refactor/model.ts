@@ -6,11 +6,13 @@
 const exampleData_todos = [
   {
     id: '123',
+    timeStamp: 1571009860554,
     text: 'do something',
     completed: true
   },
   {
     id: '124',
+    timeStamp: 1571009869999,
     text: 'do something',
     completed: true
   }

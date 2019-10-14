@@ -20,8 +20,9 @@ function todosReducer(
     case actionNames.todos_add: {
       type Tadd = typeof action
       const newId = action && action.payload && action.payload.newId
+      const timeStamp = action && action.payload && action.payload.timeStamp
       const text = action && action.payload && action.payload.text
-      const newTodo:Ttodo = {id:newId, text, completed:false}
+      const newTodo:Ttodo = {id:newId, timeStamp, text, completed:false}
       return [...state, newTodo]
     }
     case actionNames.todos_delete: {

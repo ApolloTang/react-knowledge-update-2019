@@ -38,11 +38,13 @@ describe('Todo selector, mapDispatchToProps', ()=>{
     dispatch_addTodo(todoText)
     const dateAfter = Date.now()
 
-    const called_newId = +spy.mock.calls[0][0]
-    expect(called_newId).toBeGreaterThanOrEqual(dateBefore)
-    expect(called_newId).toBeLessThanOrEqual(dateAfter)
+    // actions.addTodo() signature:
+    //   const todos_add = (newId:string, timeStamp:number, text:string) => ({
+    const called_timeStamp = spy.mock.calls[0][1]
+    const called_text = spy.mock.calls[0][2]
 
-    const called_text = spy.mock.calls[0][1]
+    expect(called_timeStamp).toBeGreaterThanOrEqual(dateBefore)
+    expect(called_timeStamp).toBeLessThanOrEqual(dateAfter)
     expect(called_text).toBe(todoText)
 
     spy.mockRestore()

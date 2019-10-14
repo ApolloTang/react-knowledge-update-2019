@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux'
+import uniqueId from 'lodash/uniqueId'
 
 import {actions} from './action'
 
@@ -11,8 +12,9 @@ const mapStoreToProps = (store:Store) => {
 
 const mapDispatchToProps = (dispatch:Dispatch) => {
   const dispatch_addTodo = (text:string) => {
-    const newId:string = Date.now()+''
-    dispatch(actions.todos_add(newId, text))
+    const newId = uniqueId()
+    const timeStamp = Date.now()
+    dispatch(actions.todos_add(newId, timeStamp, text))
   }
   const dispatch_deleteTodo = (id:string) => {
     dispatch(actions.todos_delete(id))

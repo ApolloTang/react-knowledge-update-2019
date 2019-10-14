@@ -7,12 +7,13 @@ import {
 describe('Todo action', ()=>{
   it('Should create an action to add new todo', () => {
     const newId = 'newId'
+    const timeStamp = 12345
     const text = 'learn react'
     const expectedAction = {
       type: actionNames.todos_add,
-      payload: { newId, text }
+      payload: { newId, timeStamp, text }
     }
-    expect(actions.todos_add(newId, text)).toEqual(expectedAction)
+    expect(actions.todos_add(newId, timeStamp, text)).toEqual(expectedAction)
    })
 
   it('Should create an action to delete a todo', () => {

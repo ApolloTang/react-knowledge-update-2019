@@ -17,12 +17,12 @@ describe('Todo reducer', ()=>{
   it('Can add new todor', ()=>{
     const prevState:Ttodos = []
     const nextState:Ttodos = [
-      {id: 'newID', text:'learn react', completed:false}
+      {id: 'newID', timeStamp:12345, text:'learn react', completed:false}
     ]
     expect(
       reducer(
         prevState,
-        actions.todos_add(nextState[0].id, nextState[0].text)
+        actions.todos_add(nextState[0].id, 12345, nextState[0].text)
       )
     ).toEqual(nextState)
   })
@@ -30,7 +30,7 @@ describe('Todo reducer', ()=>{
   it('Can delete todo', ()=>{
     const idToDelete = 'idToDelete'
     const prevState:Ttodos = [
-      {id: idToDelete, text:'learn react', completed:false}
+      {id: idToDelete, timeStamp:12345, text:'learn react', completed:false}
     ]
     const nextState:Ttodos = []
     expect(
@@ -43,10 +43,10 @@ describe('Todo reducer', ()=>{
   it('Can toggle todo', ()=>{
     const idToToggle = 'idToToggle'
     const prevState:Ttodos = [
-      {id: idToToggle, text:'learn react', completed:false}
+      {id: idToToggle, timeStamp:12345, text:'learn react', completed:false}
     ]
     const nextState:Ttodos = [
-      {id: idToToggle, text:'learn react', completed:true}
+      {id: idToToggle, timeStamp:12345, text:'learn react', completed:true}
     ]
     expect(
       reducer(
