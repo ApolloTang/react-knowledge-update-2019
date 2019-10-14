@@ -87,7 +87,7 @@ const getPosts = async():Promise<TserializedPosts> => {
 }
 
 
-const subReddit = {
+const api = {
   getPosts
 }
 
@@ -101,8 +101,6 @@ export {
   // Tpost,
   TpostData,
   // TserializedPosts,
-  TapiPosts
-}
-export default {
-  subReddit
+  TapiPosts,
+  api
 }
