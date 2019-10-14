@@ -15,19 +15,19 @@ function reducer(
 ):State {
   switch (action.type) {
     case actionNames.counter_increase:
-      type inc = typeof action
+      type Tinc = typeof action
       return {
         ...state,
         count: state.count + 1
       }
     case actionNames.counter_decrease:
-      type dec = typeof action
+      type Tdec = typeof action
       return {
         ...state,
         count: state.count - 1
       }
     default:
-      type catchall = typeof action
+      type Tcatchall = typeof action
       return state
   }
 }
