@@ -5,16 +5,16 @@ interface ExtendedHTMLFormElement extends HTMLFormControlsCollection {
   'new-todo': HTMLInputElement
 }
 
-interface Todo {
+interface Ttodo {
   id: string
   text: string
   completed: boolean
 }
 
-type Todos = Todo[]
+type Ttodos = Ttodo[]
 
 interface TodosProps {
-  todo: Todo
+  todo: Ttodo
   deleteTodo: ()=>void
   toggleTodo: ()=>void
 }
@@ -35,7 +35,7 @@ const TodoItem = ({todo, deleteTodo, toggleTodo}:TodosProps) => {
 }
 
 const App = () => {
-  const [todos, setTodos] = useState<Todos>([])
+  const [todos, setTodos] = useState<Ttodos>([])
   const [todoInputText, setTodoInputText] = useState<string>('')
 
   const handle_newTodoChange = (e:React.FormEvent) => {
@@ -49,7 +49,7 @@ const App = () => {
     const formElements =  (e.target as HTMLFormElement).elements as ExtendedHTMLFormElement
     const newTodoText = formElements['new-todo'].value
 
-    const newTodo:Todo = {
+    const newTodo:Ttodo = {
       id: Date.now()+'',
       text: newTodoText,
       completed: false
@@ -64,7 +64,7 @@ const App = () => {
   }
 
   const handle_toggle = (id:string) => () => {
-    setTodos(prevTodos => prevTodos.map((prevTodo:Todo)=>{
+    setTodos(prevTodos => prevTodos.map((prevTodo:Ttodo)=>{
       return (id === prevTodo.id)
         ? {...prevTodo, completed: !prevTodo.completed }
         : prevTodo
