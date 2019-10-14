@@ -28,7 +28,7 @@ const getPosts = async():Promise<Tsubreddit_serialized> => {
 }
 
 
-const subReddit = {
+const api = {
   getPosts
 }
 
@@ -39,8 +39,6 @@ type TapiPostsError = undefined|string
 
 export {
   TapiPostsError,
-  TapiPosts
-}
-export default {
-  subReddit
+  TapiPosts,
+  api
 }

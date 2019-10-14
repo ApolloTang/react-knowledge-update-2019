@@ -1,6 +1,6 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import {Tstore} from './store'
-import api from './api'
+import { api } from './api'
 import {
   Tsubreddit_serialized
 } from './model'
@@ -50,7 +50,7 @@ const thunk_fetchSubreddit =
     dispatch( action_fetchSubreddit_start() )
     let payload_subreaddit:Tpayload_subreddit = undefined
     try {
-      payload_subreaddit = await api.subReddit.getPosts()
+      payload_subreaddit = await api.getPosts()
       dispatch( action_fetchSubreddit_success(payload_subreaddit) )
     } catch (error) {
       dispatch( action_fetchSubreddit_fail(error.toString()))

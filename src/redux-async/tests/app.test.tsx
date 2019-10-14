@@ -10,16 +10,15 @@ import {rootReducer} from '../store'
 import { Tposts } from  '../model'
 
 
-import api from '../api'
+import { api } from '../api'
 jest.mock('../api', ()=>(
   {
-    subReddit: {
+    api: {
       getPosts: () => {}
     }
   }
 ))
-const apiSubReddit = api.subReddit
-const spy = jest.spyOn(apiSubReddit, 'getPosts')
+const spy = jest.spyOn(api, 'getPosts')
 
 
 const mockPosts1 = [
@@ -59,8 +58,8 @@ describe('[Fetching Subreddit App]', () => {
   })
 
   it('Module mock api with spy works: ', async () => {
-    const payload_subreaddit1 = await api.subReddit.getPosts()
-    const payload_subreaddit2 = await api.subReddit.getPosts()
+    const payload_subreaddit1 = await api.getPosts()
+    const payload_subreaddit2 = await api.getPosts()
     const t1 = payload_subreaddit1.receivedAt
     const t2 = payload_subreaddit2.receivedAt
     expect(t1).not.toBe(t2)

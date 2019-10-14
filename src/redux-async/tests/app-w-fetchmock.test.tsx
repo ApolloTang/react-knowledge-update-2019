@@ -13,7 +13,7 @@ import {
   example_apiSubreddit,
   apiSerializer_subreddit,
 } from '../model'
-import api from '../api'
+import { api } from '../api'
 
 
 const examplePosts = apiSerializer_subreddit(example_apiSubreddit).posts
@@ -26,7 +26,7 @@ describe('[Using mock-fetch]', () => {
 
   it('fetchMock should return mockPosts', async () => {
     fetchMock.get('https://www.reddit.com/r/reactjs.json', example_apiSubreddit)
-    const mockFetchData_serialized = await api.subReddit.getPosts()
+    const mockFetchData_serialized = await api.getPosts()
     expect(mockFetchData_serialized.posts).toEqual(examplePosts)
   })
 
@@ -55,7 +55,7 @@ describe('[Using mock-fetch]', () => {
     fetchMock.get('https://www.reddit.com/r/reactjs.json', 500)
 
     try {
-      await api.subReddit.getPosts()
+      await api.getPosts()
     } catch (error) {
       expect(error.toString()).toContain(500)
     }
