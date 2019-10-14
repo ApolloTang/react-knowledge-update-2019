@@ -1,14 +1,14 @@
-enum ANames_Counter {
+enum actionNames {
   INCREMENT = 'INCREMENT',
   DECREMENT = 'DECREMENT'
 }
 
 
 const ACrtor_increase = () => ({
-  type: ANames_Counter.INCREMENT as ANames_Counter.INCREMENT
+  type: actionNames.INCREMENT as actionNames.INCREMENT
 })
 const ACrtor_decrease = () => ({
-  type: ANames_Counter.DECREMENT as ANames_Counter.DECREMENT
+  type: actionNames.DECREMENT as actionNames.DECREMENT
 })
 
 
@@ -23,7 +23,7 @@ const ACrtors_Counter = {
 
 
 export {
-  ANames_Counter,
+  actionNames,
   ACrtors_Counter,
   TACrtors_Counter
 }

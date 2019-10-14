@@ -1,5 +1,5 @@
 import {
-  ANames_Counter,
+  actionNames,
   TACrtors_Counter
 } from './action'
 
@@ -14,13 +14,13 @@ function reducer(
   action:TACrtors_Counter
 ):State {
   switch (action.type) {
-    case ANames_Counter.INCREMENT:
+    case actionNames.INCREMENT:
       type inc = typeof action
       return {
         ...state,
         count: state.count + 1
       }
-    case ANames_Counter.DECREMENT:
+    case actionNames.DECREMENT:
       type dec = typeof action
       return {
         ...state,
