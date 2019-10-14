@@ -17,4 +17,14 @@ const mapDispatchToProps = (dispatch:Dispatch) => (
   }
 )
 
-export {mapStoreToProps, mapDispatchToProps}
+
+type TmapDispatchToProps = ReturnType<typeof mapDispatchToProps>
+type TmapStoreToProps = ReturnType<typeof mapStoreToProps>
+
+
+export {
+  TmapDispatchToProps,
+  TmapStoreToProps,
+  mapStoreToProps,
+  mapDispatchToProps
+}
