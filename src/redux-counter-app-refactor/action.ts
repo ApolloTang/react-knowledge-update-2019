@@ -13,7 +13,8 @@ const counter_decrease = () => ({
 
 
 type Tactions =
-  ReturnType<typeof counter_increase> | ReturnType<typeof counter_decrease>
+  ReturnType<typeof counter_increase> |
+  ReturnType<typeof counter_decrease>
 
 
 const actions = {
