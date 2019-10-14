@@ -16,7 +16,7 @@ type TACrtors_Counter =
   ReturnType<typeof counter_increase> | ReturnType<typeof counter_decrease>
 
 
-const ACrtors_Counter = {
+const actions = {
   counter_increase,
   counter_decrease
 }
@@ -24,7 +24,7 @@ const ACrtors_Counter = {
 
 export {
   actionNames,
-  ACrtors_Counter,
+  actions,
   TACrtors_Counter
 }
 

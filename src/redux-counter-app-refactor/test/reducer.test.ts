@@ -1,6 +1,6 @@
 import { initialState, reducer } from '../reducer'
 import {
-  ACrtors_Counter,
+  actions,
   TACrtors_Counter
 } from '../action'
 
@@ -14,7 +14,7 @@ describe('Counter reducer', ()=>{
     expect(
       reducer(
         {count:1},
-        ACrtors_Counter.counter_increase()
+        actions.counter_increase()
       )
     ).toEqual({count:2})
   })
@@ -23,7 +23,7 @@ describe('Counter reducer', ()=>{
     expect(
       reducer(
         {count:1},
-        ACrtors_Counter.counter_decrease()
+        actions.counter_decrease()
       )
     ).toEqual({count:0})
   })

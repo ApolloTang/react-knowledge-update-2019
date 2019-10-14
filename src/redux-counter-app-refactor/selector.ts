@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 
-import {ACrtors_Counter} from './action'
+import {actions} from './action'
 
 import {State as Store} from './reducer'
 
@@ -12,8 +12,8 @@ const mapStoreToProps = (store:Store) => {
 
 const mapDispatchToProps = (dispatch:Dispatch) => (
   {
-    dispatch_increase() { dispatch(ACrtors_Counter.counter_increase()) },
-    dispatch_decrease() { dispatch(ACrtors_Counter.counter_decrease()) },
+    dispatch_increase() { dispatch(actions.counter_increase()) },
+    dispatch_decrease() { dispatch(actions.counter_decrease()) },
   }
 )
 
