@@ -2,10 +2,10 @@ import { Dispatch } from 'redux'
 
 import {actions} from './action'
 
-import {State as Store} from './reducer'
+import {Tstore} from './store'
 
 
-const mapStoreToProps = (store:Store) => {
+const mapStoreToProps = (store:Tstore) => {
   const count = store.count
   return {count}
 }

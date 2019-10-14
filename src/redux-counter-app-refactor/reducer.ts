@@ -3,16 +3,16 @@ import {
   Tactions
 } from './action'
 
-interface State {
+interface Treducer {
   readonly count: number
 }
 
-const initialState:State = {count:0}
+const initialState:Treducer = {count:0}
 
 function reducer(
-  state:State = initialState,
+  state:Treducer = initialState,
   action:Tactions
-):State {
+):Treducer {
   switch (action.type) {
     case actionNames.counter_increase:
       type Tinc = typeof action
@@ -33,7 +33,6 @@ function reducer(
 }
 
 export {
-  State,
   initialState,
   reducer
 }
