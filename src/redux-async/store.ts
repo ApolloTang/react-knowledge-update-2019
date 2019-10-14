@@ -25,8 +25,8 @@ const store = createStore(
   )
 )
 
-export default store
 export {
   Tstore,
+  store,
   rootReducer
 }
