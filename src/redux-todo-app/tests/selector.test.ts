@@ -4,7 +4,7 @@ import {
   mapStoreToProps,
   mapDispatchToProps
 } from  '../selector'
-import {Store} from '../store'
+import {Tstore} from '../store'
 
 import {actions} from '../action'
 
@@ -12,7 +12,7 @@ import {actions} from '../action'
 describe('Todo selector, mapStoreToProps', ()=>{
   const fakeStore = {
     todos: 'todos'
-  } as unknown as Store
+  } as unknown as Tstore
 
   it('Should select todos from the store: ', () => {
     expect(mapStoreToProps(fakeStore)).toEqual(fakeStore)

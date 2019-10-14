@@ -3,9 +3,6 @@ import {combineReducers} from 'redux'
 
 import {reducer} from './reducer'
 
-import {
-  Ttodos
-} from './model'
 
 const rootReducer = combineReducers(
   {
@@ -13,9 +10,8 @@ const rootReducer = combineReducers(
   }
 )
 
-interface Store {
-  todos: Ttodos
-}
+type Tstore = ReturnType<typeof rootReducer>
+
 
 const store = createStore(
   rootReducer,
@@ -24,6 +20,6 @@ const store = createStore(
 
 export default store
 export {
-  Store,
+  Tstore,
   rootReducer
 }

@@ -3,9 +3,9 @@ import uniqueId from 'lodash/uniqueId'
 
 import {actions} from './action'
 
-import {Store} from './store'
+import {Tstore} from './store'
 
-const mapStoreToProps = (store:Store) => {
+const mapStoreToProps = (store:Tstore) => {
   return {todos: store.todos}
 }
 
