@@ -1,7 +1,7 @@
 import {createStore} from 'redux'
 import {combineReducers} from 'redux'
 
-import todosReducer from './reducer'
+import {reducer} from './reducer'
 
 import {
   Ttodos
@@ -9,7 +9,7 @@ import {
 
 const rootReducer = combineReducers(
   {
-    todos:todosReducer
+    todos:reducer
   }
 )
 

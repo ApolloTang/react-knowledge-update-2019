@@ -1,6 +1,4 @@
-import reducer,  {
-  initialState,
-} from '../reducer'
+import { initialState, reducer } from '../reducer'
 import { Ttodos } from '../model'
 import {
   Tactions,

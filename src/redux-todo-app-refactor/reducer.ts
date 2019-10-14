@@ -12,7 +12,7 @@ import {
 const initialState:Ttodos = []
 
 
-function todosReducer(
+function reducer(
   state:Ttodos = initialState,
   action:Tactions
 ):Ttodos {
@@ -50,5 +50,5 @@ function todosReducer(
 
 export {
   initialState,
+  reducer
 }
-export default todosReducer
