@@ -12,8 +12,8 @@ const mapStoreToProps = (store:Store) => {
 
 const mapDispatchToProps = (dispatch:Dispatch) => (
   {
-    dispatch_increase() { dispatch(ACrtors_Counter.ACrtor_increase()) },
-    dispatch_decrease() { dispatch(ACrtors_Counter.ACrtor_decrease()) },
+    dispatch_increase() { dispatch(ACrtors_Counter.counter_increase()) },
+    dispatch_decrease() { dispatch(ACrtors_Counter.counter_decrease()) },
   }
 )
 

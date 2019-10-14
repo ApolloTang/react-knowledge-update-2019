@@ -14,7 +14,7 @@ describe('Counter reducer', ()=>{
     expect(
       reducer(
         {count:1},
-        ACrtors_Counter.ACrtor_increase()
+        ACrtors_Counter.counter_increase()
       )
     ).toEqual({count:2})
   })
@@ -23,7 +23,7 @@ describe('Counter reducer', ()=>{
     expect(
       reducer(
         {count:1},
-        ACrtors_Counter.ACrtor_decrease()
+        ACrtors_Counter.counter_decrease()
       )
     ).toEqual({count:0})
   })

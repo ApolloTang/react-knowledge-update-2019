@@ -4,21 +4,21 @@ enum actionNames {
 }
 
 
-const ACrtor_increase = () => ({
+const counter_increase = () => ({
   type: actionNames.INCREMENT as actionNames.INCREMENT
 })
-const ACrtor_decrease = () => ({
+const counter_decrease = () => ({
   type: actionNames.DECREMENT as actionNames.DECREMENT
 })
 
 
 type TACrtors_Counter =
-  ReturnType<typeof ACrtor_increase> | ReturnType<typeof ACrtor_decrease>
+  ReturnType<typeof counter_increase> | ReturnType<typeof counter_decrease>
 
 
 const ACrtors_Counter = {
-  ACrtor_increase,
-  ACrtor_decrease
+  counter_increase,
+  counter_decrease
 }
 
 
