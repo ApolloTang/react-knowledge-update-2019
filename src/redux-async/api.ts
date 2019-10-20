@@ -1,6 +1,6 @@
-import fetchMock from 'fetch-mock'
+import fetchMock from 'fetch-mock' // eslint-disable-line
 import {
-  example_apiSubreddit,
+  example_apiSubreddit,  // eslint-disable-line
   apiSerializer_subreddit,
   Tsubreddit_serialized
 } from './model'
