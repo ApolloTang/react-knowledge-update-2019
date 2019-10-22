@@ -8,11 +8,11 @@
 // ========================================
 // Example of subreddit data shape from API
 // ========================================
-const example_apiSubreddit = { // Tsubreddit_api
-  data: {                      // TsubredditData_api
-    children: [                // Tposts_api
-      {                        // Tpost_api
-        data: {                // TpostData_api
+const exampleData_apiSubreddit = { // Tsubreddit_api
+  data: {                          // TsubredditData_api
+    children: [                    // Tposts_api
+      {                            // Tpost_api
+        data: {                    // TpostData_api
           author: 'author1', title: 'title1', id: '1'
         }
       },
@@ -44,7 +44,7 @@ const exampleData_reducerSubrediddit = {
 // ==========
 // Api schema
 // ==========
-type Tsubreddit_api = typeof example_apiSubreddit
+type Tsubreddit_api = typeof exampleData_apiSubreddit
 type TsubredditData_api = Tsubreddit_api['data']
 type Tposts_api = TsubredditData_api['children']
 type Tpost_api = Tposts_api[0]
@@ -104,7 +104,7 @@ const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
 
 
 export {
-  example_apiSubreddit,
+  exampleData_apiSubreddit,
 
   Tsubreddit_api,
   TsubredditData_api,

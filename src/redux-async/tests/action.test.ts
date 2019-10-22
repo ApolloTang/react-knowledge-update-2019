@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock'
-import { example_apiSubreddit } from '../model'
+import { exampleData_apiSubreddit } from '../model'
 
 import {Action} from 'redux'
 import {ThunkDispatch} from 'redux-thunk'
@@ -29,7 +29,7 @@ describe('[Selector, mapDispatchToProps]', ()=>{
   })
 
   it('thunk_fetchSubreddit should dispatch start and success', async()=>{
-    fetchMock.get('https://www.reddit.com/r/reactjs.json', example_apiSubreddit)
+    fetchMock.get('https://www.reddit.com/r/reactjs.json', exampleData_apiSubreddit)
     await fakeDispatch(asyncActions.thunk_fetchSubreddit())
 
     const dipatchedActions = fakeStore.getActions()

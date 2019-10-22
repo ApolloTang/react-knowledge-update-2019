@@ -10,13 +10,13 @@ import { render, wait} from '@testing-library/react'
 import { ConnectedApp } from '../app'
 import {rootReducer} from '../store'
 import {
-  example_apiSubreddit,
+  exampleData_apiSubreddit,
   apiSerializer_subreddit,
 } from '../model'
 import { api } from '../api'
 
 
-const examplePosts = apiSerializer_subreddit(example_apiSubreddit).posts
+const examplePosts = apiSerializer_subreddit(exampleData_apiSubreddit).posts
 
 
 describe('[Using mock-fetch]', () => {
@@ -25,13 +25,13 @@ describe('[Using mock-fetch]', () => {
   })
 
   it('fetchMock should return mockPosts', async () => {
-    fetchMock.get('https://www.reddit.com/r/reactjs.json', example_apiSubreddit)
+    fetchMock.get('https://www.reddit.com/r/reactjs.json', exampleData_apiSubreddit)
     const mockFetchData_serialized = await api.getPosts()
     expect(mockFetchData_serialized.posts).toEqual(examplePosts)
   })
 
   it('When subreddit post is showing there should be no loading message', async () => {
-    fetchMock.get('https://www.reddit.com/r/reactjs.json', example_apiSubreddit)
+    fetchMock.get('https://www.reddit.com/r/reactjs.json', exampleData_apiSubreddit)
 
     const {
       getByText,
