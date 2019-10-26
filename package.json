@@ -74,7 +74,6 @@
   },
   "scripts": {
     "dev": "node dev-server ",
-    "compile": "NODE_ENV=test webpack",
     "t1": "jest ",
     "t1:w": "jest --watch ",
     "t:coverage": "jest --coverage",
