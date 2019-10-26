@@ -28,8 +28,8 @@ $ yarn t:coverage    # run jest coverage of all project
 $ yarn t:clearCache  # reset jest's cache
 $ yarn t:debug       # run jest with to debug on all project in browser inspector (for info: https://nodejs.org/en/docs/guides/debugging-getting-started/)
 $ yarn lint          # run linter on all project
-$ yarn tsc           # run typescript compiler on all project
-$ yarn tsc:w         # run typescript compiler on all project in watch mode
+$ yarn tsc           # check for type error on all project
+$ yarn tsc:w         # check for type error on all project in watch mode
 ```
 
 
