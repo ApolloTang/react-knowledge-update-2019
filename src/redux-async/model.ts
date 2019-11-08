@@ -6,101 +6,81 @@
 
 
 // ========================================
-// Example of subreddit data shape from API
+//    Example of subreddit data shape
+//    from API
 // ========================================
 
-  // case (1): good data
-  // ---------------
-  const exampleData_apiSubreddit = {
-    data: {
-      children: [
-        {
-          data: {
-            author: 'author1', title: 'title1', id: '1'
-          }
-        },
-        {
-          data: {
-            author: 'author2', title: 'title2', id: '2'
-          }
-        },
-      ]
+  // -----------------
+  //  case: good data
+  // -----------------
+    const exampleData_apiSubreddit = {
+      data: {
+        children: [
+          { data: { author: 'author1', title: 'title1', id: '1' } },
+          { data: { author: 'author2', title: 'title2', id: '2' } }
+          // ...
+        ]
+      }
     }
-  }
 
-  // case (2): good data but no post
-  // ---------------------------
-  const exampleData_apiSubreddit_empty = {  // eslint-disable-line
-    data: {
-      children: [
-      ]
-    }
-  }
-
-  // case (3, 4): possible bad data
-  // --------------
-  const exampleData_apiSubreddit_error1 = {}        // eslint-disable-line
-  const exampleData_apiSubreddit_error2 = undefined // eslint-disable-line
+  // -------------------------
+  //  case: possible bad data
+  // -------------------------
+    const exampleData_apiSubreddit_error1 = {}        // eslint-disable-line
+    const exampleData_apiSubreddit_error2 = undefined // eslint-disable-line
 
 
+// =====================================
+//     Example of subreddit data
+//     shape in action payload
+// =====================================
 
-
-
-// ==================================================
-// Example of subreddit data shape in action payload
-// ==================================================
-
-  // case (1): transfrom from good data
-  // -----------------------------------
+  // ---------------------------------
+  //  case: transfrom from good data
+  // ---------------------------------
   const exampleData_payloadSubredit = { // eslint-disable-line
-    posts: [ // ReadonlyArray
-        {
-          author: 'author1', title: 'title1', id: '1'
-        },
-        {
-          author: 'author2', title: 'title2', id: '2'
-        }
+    posts: [ // <---  ReadonlyArray
+      { author: 'author1', title: 'title1', id: '1' },
+      { author: 'author2', title: 'title2', id: '2' }
+      // ...
+      // ...
     ],
     receivedAt: 1569818341066
   }
 
 
-  // case (2): transfrom from good data but empty
-  // ---------------------------------------------
+  // ---------------------------------
+  //  case: transfrom from bad data
+  // ---------------------------------
   const exampleData_payloadSubredit_empty = { // eslint-disable-line
     posts: [], // ReadonlyArray
     receivedAt: 1569818341066
   }
 
-  // case (3): transfrom from bad data
-  // ----------------------------------
-  const exampleData_payloadSubredit_error = { // eslint-disable-line
-    posts: [], // ReadonlyArray
-    receivedAt: 1569818341066
+
+// ============
+//  Api schema
+// ============
+
+  type Tpost_api = {
+    author: string
+    title: string
+    id: string
   }
 
-
-// ==========
-// Api schema
-// ==========
   type TpostData_api = {
-    data:{
-      author: string
-      title: string
-      id: string
-    }
+    data: Tpost_api
   }
 
   type Tsubreddit_api =
-    {
-      // data: { children: TpostData_api[] | never[] }
-      data: { children: TpostData_api[] | never[] }
-    } & {} | undefined
+    { data: { children: TpostData_api[] } }  // case: good data
+    & {} | undefined                         // case: possible bad data
 
 
-// ==============
-// payload schema
-// ==============
+// ================
+//  payload schema
+// ================
+
   type Tpost = {
       author: string
       title: string
@@ -114,21 +94,19 @@
   }
 
 
-// ==========================================================
-// Here were transform (serialize) api data to the shape that
-// is digestable by reducer:
+// ==============================================================
+//   Here were transform (serialize) api data to the shape that
+//   is digestable by reducer:
 //
-//    Tsubreddit_api ==(transform)==> Tsubreddit_serialized
-//
-// ==========================================================
+//      Tsubreddit_api ==(transform)==> Tsubreddit_serialized
+// ==============================================================
 const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
   const receivedAt = Date.now()
 
-  let subreddit_serialized:Tsubreddit_serialized = {
-    posts:[],
+  let subreddit_serialized = {
+    posts:[] as Tposts,
     receivedAt
   }
-
 
   if (json && json.data && json.data.children && Array.isArray(json.data.children)) {
     // const posts = (json.data.children as TpostData_api[]).map(
@@ -156,11 +134,7 @@ const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
 
 export {
   exampleData_apiSubreddit,
-
   Tsubreddit_api,
-  // TsubredditData_api,
-  // Tposts_api,
-  // Tpost_api,
   TpostData_api,
 
   apiSerializer_subreddit,
