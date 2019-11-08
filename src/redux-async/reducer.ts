@@ -9,13 +9,13 @@ import {
 
 
 interface Treducer {
-  posts     : undefined|Tposts
+  posts     : Tposts
   receivedAt: undefined|number
   isLoading : boolean
   errorMsg  : undefined|string
 }
 const initialState:Treducer = {
-  posts     : undefined,
+  posts     : [],
   receivedAt: undefined,
   isLoading : false,
   errorMsg  : undefined

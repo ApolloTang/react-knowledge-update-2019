@@ -1,11 +1,11 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
-import {Tstore} from './store'
+import { Tstore } from './store'
 import { api } from './api'
 import {
   Tsubreddit_serialized
 } from './model'
 
-type Tpayload_subreddit = Tsubreddit_serialized | undefined
+type Tpayload_subreddit = Tsubreddit_serialized
 type Tpayload_subreddit_error = string | undefined
 
 
@@ -35,27 +35,16 @@ type Tactions_fetchSubreddit =
   ReturnType<typeof action_fetchSubreddit_fail>
 
 
-const thunk_fetchSubreddit =
-  ():ThunkAction<
-    Promise<Tpayload_subreddit>,
-    Tstore,
-    {},
-    Tactions_fetchSubreddit
-  > => async ( dispatch:ThunkDispatch<
-      Tstore,
-      {},
-      Tactions_fetchSubreddit
-    >,
-  ):Promise<Tpayload_subreddit> => {
+const thunk_fetchSubreddit = ():ThunkAction< Promise<void>, Tstore, {}, Tactions_fetchSubreddit > =>
+  async ( dispatch:ThunkDispatch< Tstore, {}, Tactions_fetchSubreddit >):Promise<void> => {
     dispatch( action_fetchSubreddit_start() )
-    let payload_subreaddit:Tpayload_subreddit = undefined
+    let payload_subreaddit = undefined as unknown as Tpayload_subreddit
     try {
       payload_subreaddit = await api.getPosts()
       dispatch( action_fetchSubreddit_success(payload_subreaddit) )
     } catch (error) {
       dispatch( action_fetchSubreddit_fail(error.toString()))
     }
-    return payload_subreaddit
 }
 
 
