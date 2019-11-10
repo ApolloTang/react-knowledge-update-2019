@@ -1,12 +1,8 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
+
 import { Tstore } from './store'
 import { api } from './api'
-import {
-  Tsubreddit_serialized
-} from './model'
-
-type Tpayload_subreddit = Tsubreddit_serialized
-type Tpayload_subreddit_error = string | undefined
+import { Tsubreddit_serialized } from './model'
 
 
 enum actionNames {
@@ -15,6 +11,11 @@ enum actionNames {
   fetchSubreddit_fail = 'fetchSubreddit_fail',
 }
 
+
+
+
+type Tpayload_subreddit = Tsubreddit_serialized
+type Tpayload_subreddit_error = string | undefined
 
 const action_fetchSubreddit_start = () => ({
   type: actionNames.fetchSubreddit_start as actionNames.fetchSubreddit_start
@@ -29,6 +30,8 @@ const action_fetchSubreddit_fail = (payload_subreddit_error:Tpayload_subreddit_e
 })
 
 
+
+
 type Tactions_fetchSubreddit =
   ReturnType<typeof action_fetchSubreddit_start> |
   ReturnType<typeof action_fetchSubreddit_success> |
@@ -37,26 +40,36 @@ type Tactions_fetchSubreddit =
 
 const thunk_fetchSubreddit = ():ThunkAction< Promise<void>, Tstore, {}, Tactions_fetchSubreddit > =>
   async ( dispatch:ThunkDispatch< Tstore, {}, Tactions_fetchSubreddit >):Promise<void> => {
+    // dispatch (1): flag to applincation to loading state
     dispatch( action_fetchSubreddit_start() )
+
     let payload_subreaddit = undefined as unknown as Tpayload_subreddit
+    // In the above, we declare payload_subreaddit but it has the value of
+    // undefined, which is not our schema. So we need to cast it to tell typescript
+    // this will be the type it expected: the Tpayload_subreddit or Tsubreddit_serialized.
+
     try {
       payload_subreaddit = await api.getPosts()
+      // dispatch (2a): we have data!
       dispatch( action_fetchSubreddit_success(payload_subreaddit) )
     } catch (error) {
+      // dispatch (2b): we have error
       dispatch( action_fetchSubreddit_fail(error.toString()))
     }
 }
 
 
-const asyncActions = {
+const asyncActions = { // <--- here we package all our thunks into an object
   thunk_fetchSubreddit,
   // thunk_postSubreddit    //<-- can have more thunk or action
 }
+
 type Tactions = Tactions_fetchSubreddit
   // | thunk_postSubreddit  // <-- combine all types of action or thunk
 
 export {
   actionNames,
+
   Tactions,
   asyncActions,
 }
