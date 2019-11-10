@@ -10,9 +10,9 @@
 //    Example of subreddit data shape from API
 // =============================================
 
-  // -----------------
+  // -------------------
   //  case(1) good data
-  // -----------------
+  // -------------------
     const exampleData_apiSubreddit = {
       data: {
         children: [

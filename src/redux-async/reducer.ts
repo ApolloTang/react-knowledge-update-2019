@@ -38,6 +38,7 @@ function reducer(
     case actionNames.fetchSubreddit_success: {
       type Tsuccess = typeof action
       const payload = action && action.payload && action.payload
+
       const posts = payload && payload.posts
       const receivedAt = payload && payload.receivedAt
       return {
