@@ -8,7 +8,7 @@ import {
 
 // ==========
 // Uncomment out one of next 2 lines to simulate mock fetching:
-  // fetchMock.get('https://www.reddit.com/r/reactjs.json', example_apiSubreddit)
+  // fetchMock.get('https://www.reddit.com/r/reactjs.json', exampleData_apiSubreddit)
   // fetchMock.get('https://www.reddit.com/r/reactjs.json', 500)
 // ==========
 
