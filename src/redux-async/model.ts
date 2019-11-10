@@ -105,7 +105,7 @@
 const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
   const receivedAt = Date.now()
 
-  let subreddit_serialized = { // case(2,3) // bad data
+  let subreddit_serialized = { // case(2,3) bad data
     posts:[] as Tposts,
     receivedAt
   }
@@ -123,7 +123,7 @@ const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
       }
     )
 
-    subreddit_serialized = { // case(1) // good data
+    subreddit_serialized = { // case(1) good data
       posts,
       receivedAt
     }
