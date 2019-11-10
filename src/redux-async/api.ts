@@ -24,21 +24,23 @@ const getPosts = async():Promise<Tsubreddit_serialized> => {
 
   const subredditInJson = await response.json()
   const data_serialized = apiSerializer_subreddit(subredditInJson)
+
   return data_serialized
 }
 
 
 const api = {
   getPosts
+  // Can have other end point in the future like:
+  //
+  //   createPosts
+  //   deletePosts
+  //   updatePosts
+  //
 }
 
 
-type TapiPosts = undefined|Tsubreddit_serialized
-type TapiPostsError = undefined|string
-
 
 export {
-  TapiPostsError,
-  TapiPosts,
   api
 }
