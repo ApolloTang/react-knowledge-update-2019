@@ -61,15 +61,17 @@ const thunk_fetchSubreddit = ():ThunkAction< Promise<void>, Tstore, {}, Tactions
 
 const asyncActions = { // <--- here we package all our thunks into an object
   thunk_fetchSubreddit,
-  // thunk_postSubreddit    //<-- can have more thunk or action
+  // thunk_deleteSubreddit    //<-- can have more thunk in the future
 }
 
 type Tactions = Tactions_fetchSubreddit
-  // | thunk_postSubreddit  // <-- combine all types of action or thunk
+// In the the above we merge the action-creator of this
+// feature (todos list) into the application action type
+
 
 export {
   actionNames,
+  asyncActions,
 
   Tactions,
-  asyncActions,
 }
