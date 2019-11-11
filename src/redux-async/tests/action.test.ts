@@ -10,8 +10,7 @@ import thunk from 'redux-thunk'
 import { actionNames, asyncActions } from '../action'
 
 
-describe('[Selector, mapDispatchToProps]', ()=>{
-
+describe('[Action, asyncAction]', ()=>{
   // Set up fake store
   const middlewares = [thunk]
   const fakeCreateStore = configureStore(middlewares)
