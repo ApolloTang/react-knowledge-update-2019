@@ -17,31 +17,36 @@ enum actionNames {
 type Tpayload_subreddit = Tsubreddit_serialized
 type Tpayload_subreddit_error = string | undefined
 
-const action_fetchSubreddit_start = () => ({
+const fetchSubreddit_start = () => ({
   type: actionNames.fetchSubreddit_start as actionNames.fetchSubreddit_start
 })
-const action_fetchSubreddit_success = (payload_subreaddit:Tpayload_subreddit) => ({
+const fetchSubreddit_success = (payload_subreaddit:Tpayload_subreddit) => ({
   type: actionNames.fetchSubreddit_success as actionNames.fetchSubreddit_success,
   payload: payload_subreaddit
 })
-const action_fetchSubreddit_fail = (payload_subreddit_error:Tpayload_subreddit_error) => ({
+const fetchSubreddit_fail = (payload_subreddit_error:Tpayload_subreddit_error) => ({
   type: actionNames.fetchSubreddit_fail as actionNames.fetchSubreddit_fail,
   error: payload_subreddit_error
 })
 
 
+const actions = {
+  fetchSubreddit_start,
+  fetchSubreddit_success,
+  fetchSubreddit_fail
+}
 
 
 type Tactions_fetchSubreddit =
-  ReturnType<typeof action_fetchSubreddit_start> |
-  ReturnType<typeof action_fetchSubreddit_success> |
-  ReturnType<typeof action_fetchSubreddit_fail>
+  ReturnType<typeof fetchSubreddit_start> |
+  ReturnType<typeof fetchSubreddit_success> |
+  ReturnType<typeof fetchSubreddit_fail>
 
 
 const thunk_fetchSubreddit = ():ThunkAction< Promise<void>, Tstore, {}, Tactions_fetchSubreddit > =>
   async ( dispatch:ThunkDispatch< Tstore, {}, Tactions_fetchSubreddit >):Promise<void> => {
     // dispatch (1): flag to applincation to loading state
-    dispatch( action_fetchSubreddit_start() )
+    dispatch( actions.fetchSubreddit_start() )
 
     let payload_subreaddit = undefined as unknown as Tpayload_subreddit
     // In the above, we declare payload_subreaddit but it has the value of
@@ -51,12 +56,13 @@ const thunk_fetchSubreddit = ():ThunkAction< Promise<void>, Tstore, {}, Tactions
     try {
       payload_subreaddit = await api.getPosts()
       // dispatch (2a): we have data!
-      dispatch( action_fetchSubreddit_success(payload_subreaddit) )
+      dispatch( actions.fetchSubreddit_success(payload_subreaddit) )
     } catch (error) {
       // dispatch (2b): we have error
-      dispatch( action_fetchSubreddit_fail(error.toString()))
+      dispatch( actions.fetchSubreddit_fail(error.toString()))
     }
 }
+
 
 
 const asyncActions = { // <--- here we package all our thunks into an object
@@ -64,14 +70,16 @@ const asyncActions = { // <--- here we package all our thunks into an object
   // thunk_deleteSubreddit    //<-- can have more thunk in the future
 }
 
+
 type Tactions = Tactions_fetchSubreddit
 // In the the above we merge the action-creator of this
-// feature (todos list) into the application action type
+// feature (fetch Subreddit) into the application action type
 
 
 export {
   actionNames,
   asyncActions,
+  actions,
 
   Tactions,
 }

@@ -135,6 +135,8 @@ const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
 
 export {
   exampleData_apiSubreddit,
+  exampleData_payloadSubredit,
+
   apiSerializer_subreddit,
 
   Tpost,

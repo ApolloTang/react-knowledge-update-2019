@@ -1,7 +1,4 @@
-import {
-  actionNames,
-  Tactions
-} from './action'
+import { actionNames, Tactions } from './action'
 
 import {
   Tposts
