@@ -20,8 +20,6 @@ import {store} from './store'
 import {ConnectedApp} from './app'
 
 
-
-
 // =====================================
 ReactDOM.render(
   <Provider store={store}>

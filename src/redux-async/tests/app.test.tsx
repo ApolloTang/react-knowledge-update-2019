@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { render, wait, fireEvent } from '@testing-library/react'
 
 import { ConnectedApp } from '../app'
-import {reducer} from '../reducer'
+import { reducer } from '../reducer'
 import { Tposts } from  '../model'
 
 

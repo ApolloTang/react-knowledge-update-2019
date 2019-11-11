@@ -1,9 +1,9 @@
-import {ThunkDispatch} from 'redux-thunk'
+import { ThunkDispatch } from 'redux-thunk'
 
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-import {Tstore} from '../store'
+import { Tstore } from '../store'
 import { asyncActions } from '../action'
 
 import {

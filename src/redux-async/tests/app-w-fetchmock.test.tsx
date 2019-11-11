@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { render, wait} from '@testing-library/react'
 
 import { ConnectedApp } from '../app'
-import {reducer} from '../reducer'
+import { reducer } from '../reducer'
 import {
   exampleData_apiSubreddit,
   apiSerializer_subreddit,

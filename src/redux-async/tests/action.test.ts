@@ -1,8 +1,8 @@
 import fetchMock from 'fetch-mock'
 import { exampleData_apiSubreddit } from '../model'
 
-import {Action} from 'redux'
-import {ThunkDispatch} from 'redux-thunk'
+import { Action } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
