@@ -16,7 +16,7 @@ const getPosts = async():Promise<Tsubreddit_serialized> => {
   const response = await fetch('https://www.reddit.com/r/reactjs.json')
 
   // Uncomment out next line to simulate latency
-  await new Promise<void>((rs)=>{setTimeout(rs, 1000)})
+  // await new Promise<void>((rs)=>{setTimeout(rs, 1000)})
 
   if (!response.ok) {
     throw new Error('HTTP error, status = ' + response.status)

@@ -37,14 +37,16 @@ describe('[Selector, mapStoreToProps]', ()=>{
     errorMsg: 'fakeErrorMsg'
   } as unknown as Tstore
 
-  expect(mapStoreToProps(fakeStore)).toEqual(
-    {
-      date: receivedAt_isoString,
-      posts: 'fakePosts',
-      isLoading: 'fakeIsLoading',
-      errorMsg: 'fakeErrorMsg'
-    }
-  )
+  it('Should map store to property', () => {
+    expect(mapStoreToProps(fakeStore)).toEqual(
+      {
+        date: receivedAt_isoString,
+        posts: 'fakePosts',
+        isLoading: 'fakeIsLoading',
+        errorMsg: 'fakeErrorMsg'
+      }
+    )
+  })
 })
 
 
