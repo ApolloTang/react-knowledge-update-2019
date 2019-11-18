@@ -37,7 +37,7 @@
 // =======================================================
 
   // ------------------------------------
-  //  case(1): transfrom from good data
+  //  case(1): transform from good data
   // ------------------------------------
   const exampleData_payloadSubredit = { // eslint-disable-line
     posts: [ // <---  ReadonlyArray
@@ -51,7 +51,7 @@
 
 
   // -------------------------------------
-  //  case(2,3): transfrom from bad data
+  //  case(2,3): transform from bad data
   // -------------------------------------
   const exampleData_payloadSubredit_empty = { // eslint-disable-line
     posts: [], // ReadonlyArray
@@ -102,17 +102,17 @@
 //
 //    Tsubreddit_api --(transform)--> Tsubreddit_serialized
 // ===========================================================
-const apiSerializer_subreddit = (json:Tsubreddit_api):Tsubreddit_serialized => {
+const apiSerializer_subreddit = (json:Tsubreddit_api) => {
   const receivedAt = Date.now()
 
-  let subreddit_serialized = { // case(2,3) bad data
-    posts:[] as Tposts,
+  let subreddit_serialized:Tsubreddit_serialized = { // case(2,3) bad data
+    posts:[],
     receivedAt
   }
 
   if (json && json.data && json.data.children && Array.isArray(json.data.children)) {
     const posts =  json.data.children.map(
-      (child:TpostData_api):Tpost => {
+      child => {
         const data = child.data
         const post = {
           author: data && data.author,
