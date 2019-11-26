@@ -22,16 +22,18 @@ describe('[Router]', () => {
   afterEach(()=>{ })
 
   describe('Navigate to page a', () => {
-    it('Router can navigate to page a', () => {
+    it('Router can navigate to page a', async () => {
       const history = createMemoryHistory()
       const store = createStore(rootReducer, applyMiddleware(thunk))
 
       const {
-        getByText
+        getByText,
+        findByText
       } = renderWithStoreAndRouter(history, store)(<App />)
 
       const link = getByText('Link to: /page a')
       fireEvent.click(link)
+      await findByText('Page content a')
     })
 
     it('Make sure jsDom is clear from state from previous state', () => {
@@ -47,18 +49,18 @@ describe('[Router]', () => {
     })
   })
 
-  it('router can handle no match', () => {
-      const history = createMemoryHistory()
-      const store = createStore(rootReducer, applyMiddleware(thunk))
+  it('router can handle no match', async () => {
+    const history = createMemoryHistory()
+    const store = createStore(rootReducer, applyMiddleware(thunk))
 
-      const {
-        getByText
-      } = renderWithStoreAndRouter(history, store)(<App />)
+    const {
+      findByText
+    } = renderWithStoreAndRouter(history, store)(<App />)
 
-      history.push('/does-not-exit')
+    history.push('/does-not-exit')
 
-      getByText('Page no match')
-    })
+    await findByText('Page no match')
+  })
 })
 
 
