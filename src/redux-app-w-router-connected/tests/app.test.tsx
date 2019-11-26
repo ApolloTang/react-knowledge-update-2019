@@ -63,7 +63,7 @@ describe('[Connected Router]', () => {
     })
   })
 
-  it('router can handle no match', () => {
+  it('router can handle no match', async () => {
       const store = createStore(
         rootReducer,
         {},
@@ -71,11 +71,13 @@ describe('[Connected Router]', () => {
       )
 
       const {
-        getByText,
+        findByText,
       } = renderWithConnectedRouter(history, store)(<App />)
 
       history.push('/does-not-exit')
-      getByText('Page no match')
+
+      ;await findByText('Page no match')
+
       const storeBeforeNavigate = store.getState()
       expect(storeBeforeNavigate.router.location.pathname).toBe('/does-not-exit')
     })
